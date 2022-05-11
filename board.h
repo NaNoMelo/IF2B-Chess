@@ -10,7 +10,7 @@ typedef enum {
 } TypePiece;
 
 typedef enum {
-    NOIR, BLANC
+    NONE, NOIR, BLANC
     //0   1
 } CouleurPiece;
 
@@ -20,6 +20,9 @@ typedef struct {
     int nbMove;
 } Piece;
 
-void genererPlateau(int taille, Piece **);
+void genererPlateau(int taille, Piece **board);
+
+void afficherPlateau(int taille, Piece **board);
+
 
 #endif //IF2B_CHESS_BOARD_H

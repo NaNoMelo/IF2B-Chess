@@ -18,6 +18,7 @@ int main() {
                 board[i] = malloc(sizeof(Piece) * taillePlateau);
             }
             genererPlateau(taillePlateau, board);
+            afficherPlateau(taillePlateau, board);
             break;
         }
         case 2:

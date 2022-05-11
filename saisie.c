@@ -22,7 +22,7 @@ int askMenu() {
 int askTaillePlateau() {
     int t;
     do {
-        printf("Choisisez la taille de votre plateau, entre 6 et 12\n");
+        printf("Choisisez la taille de votre plateau, entre 6 et 12:\n");
         scanf("%d", &t);
     } while (t > 12 || t < 6);
     return t;
