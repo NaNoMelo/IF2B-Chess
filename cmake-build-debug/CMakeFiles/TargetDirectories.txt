@@ -1,0 +1,3 @@
+C:/Users/natha/OneDrive - Universite De Technologie De Belfort-Montbeliard/Documents/Cours/UTBM/TC02/IF2/C_Scripts/IF2B-Chess/cmake-build-debug/CMakeFiles/IF2B_Chess.dir
+C:/Users/natha/OneDrive - Universite De Technologie De Belfort-Montbeliard/Documents/Cours/UTBM/TC02/IF2/C_Scripts/IF2B-Chess/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/natha/OneDrive - Universite De Technologie De Belfort-Montbeliard/Documents/Cours/UTBM/TC02/IF2/C_Scripts/IF2B-Chess/cmake-build-debug/CMakeFiles/rebuild_cache.dir
