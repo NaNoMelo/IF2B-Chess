@@ -9,12 +9,16 @@
 
 int main() {
     Piece **board;
-    int taillePlateau, move[2][2], tour, joueur;
+    int taillePlateau, **move, tour, joueur;
+    move = (int **) malloc(sizeof(int *) * 2);
+    for (int i = 0; i < 2; i++) {
+        move[i] = (int *) malloc(sizeof(int) * 2);
+    }
     bool partie = true;
     switch (askMenu()) {
         case 1: {
             taillePlateau = askTaillePlateau();
-            board = (Piece **) malloc(sizeof(Piece) * taillePlateau);
+            board = (Piece **) malloc(sizeof(Piece *) * taillePlateau);
             for (int i = 0; i < taillePlateau; i++) {
                 board[i] = malloc(sizeof(Piece) * taillePlateau);
             }
@@ -32,14 +36,12 @@ int main() {
     }
     while (partie == true) {
         joueur = tour % 2;
-        printf("Déplacement du joueur %d", joueur + 1);
-
+        afficherPlateau(taillePlateau, board);
+        askDeplacement(taillePlateau, joueur, move);
 
         tour++;
         partie = false;
     }
-
-    afficherPlateau(taillePlateau, board);
 
 
     free(board);

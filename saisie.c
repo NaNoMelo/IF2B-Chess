@@ -9,6 +9,7 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
+#include "ctype.h"
 
 int askMenu() {
     int m;
@@ -26,4 +27,36 @@ int askTaillePlateau() {
         scanf("%d", &t);
     } while (t > 12 || t < 6);
     return t;
+}
+
+void askDeplacement(int taillePlateau, int joueur, int **move) {
+    int state;
+    char unparsedMove[7];
+    do {
+        state = 0;
+        printf("Deplacement du joueur %d:\n", joueur + 1);
+        fflush(stdin);
+        scanf("%s", &unparsedMove);
+        unparsedMove[6] = '\0';
+        strupr(unparsedMove);
+        for (int i = 0; i < strlen(unparsedMove); ++i) {
+            if (state % 2) {
+                if (isdigit(unparsedMove[i]) && unparsedMove[i] - '0' > 0 && unparsedMove[i] - '0' <= taillePlateau) {
+                    move[1][(state - 1) / 2] = unparsedMove[i] - '0';
+                    if (isdigit(unparsedMove[i + 1]) && unparsedMove[i + 1] - '0' > 0 &&
+                        unparsedMove[i + 1] - '0' <= taillePlateau) {
+                        i++;
+                        move[1][(state - 1) / 2] *= 10;
+                        move[1][(state - 1) / 2] += unparsedMove[i];
+                    }
+                }
+            } else {
+                if (unparsedMove[i] >= 65 && unparsedMove[i] < 65 + taillePlateau) {
+                    move[0][state / 2] = unparsedMove[i] - 64;
+                }
+            }
+            state++;
+        }
+        printf("%d %d\n%d %d", move[0][0], move[0][1], move[1][0], move[1][1]);
+    } while (false);
 }
