@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/natha/OneDrive - Universite De Technologie De Belfort-Montbeliard/Documents/Cours/UTBM/TC02/IF2/C_Scripts/IF2B-Chess
+# Install script for directory: C:/Users/yannt/Desktop/IF2A/IF2B-Chess
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/natha/OneDrive - Universite De Technologie De Belfort-Montbeliard/Documents/Cours/UTBM/TC02/IF2/C_Scripts/IF2B-Chess/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/yannt/Desktop/IF2A/IF2B-Chess/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

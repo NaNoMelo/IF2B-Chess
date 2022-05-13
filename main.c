@@ -39,6 +39,7 @@ int main() {
         afficherPlateau(taillePlateau, board);
         askDeplacement(taillePlateau, joueur, move);
 
+
         tour++;
         partie = false;
     }
