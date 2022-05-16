@@ -31,13 +31,12 @@ int askTaillePlateau() {
 
 void askDeplacement(int taillePlateau, int joueur, int **move) {
     int state;
-    char unparsedMove[7];
+    char unparsedMove[10];
     do {
         state = 0;
         printf("Deplacement du joueur %d:\n", joueur + 1);
         fflush(stdin);
         scanf("%s", &unparsedMove);
-        unparsedMove[6] = '\0';
         strupr(unparsedMove);
         for (int i = 0; i < strlen(unparsedMove); ++i) {
             if (state % 2) {
@@ -58,5 +57,5 @@ void askDeplacement(int taillePlateau, int joueur, int **move) {
             state++;
         }
         printf("%d %d\n%d %d", move[0][0], move[0][1], move[1][0], move[1][1]);
-    } while (false);
+    } while (!(move[0][0] && move[0][1] && move[1][0] && move[1][1]));
 }
