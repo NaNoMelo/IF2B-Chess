@@ -10,8 +10,8 @@
 #include "save.h"
 
 int main() {
-    FILE *save;
-    save = fopen("./save.txt", "r+");
+    FILE *save = fopen("./save.txt", "r+");
+    if (save == NULL) save = fopen("./save.txt", "w");
     Piece **board;
     int taillePlateau, **move, tour, joueur;
     move = (int **) malloc(sizeof(int *) * 2);
@@ -20,6 +20,17 @@ int main() {
     }
     bool partie = true;
     switch (askMenu()) {
+        case 2:
+            printf("load");
+            fscanf(save, "%d", taillePlateau);
+            printf("%d", taillePlateau);
+            if (taillePlateau == NULL) {
+                printf("Echec du chargement de la partie, creation d'une nouvelle partie.\n");
+            } else {
+                //loadGame();
+                break;
+            }
+
         case 1: {
             taillePlateau = askTaillePlateau();
             board = (Piece **) malloc(sizeof(Piece *) * taillePlateau);
@@ -30,10 +41,6 @@ int main() {
             tour = 0;
             break;
         }
-        case 2:
-            printf("load");
-            loadGame();
-            break;
 
         case 3:
             printf("quit");
@@ -44,8 +51,12 @@ int main() {
         afficherPlateau(taillePlateau, board);
 //        do {
         if (askDeplacement(taillePlateau, joueur, move)) {
-            saveGame(save, board, taillePlateau, tour);
-            exit(0);
+            if (save != NULL) {
+                saveGame(save, board, taillePlateau, tour);
+                exit(0);
+            } else {
+                printf("fichier invalide");
+            }
         }
 //        }while(!verifDeplacement(board,move,joueur));
         executeMove(board, move);

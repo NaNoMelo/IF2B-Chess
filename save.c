@@ -14,5 +14,5 @@
 #include "save.h"
 
 void saveGame(FILE *save, Piece **board, int taillePlateau, int tour) {
-
+    fprintf(save, "%d\n%d\n", taillePlateau, tour);
 }
