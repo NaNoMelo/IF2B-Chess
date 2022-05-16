@@ -64,4 +64,29 @@ void executeMove(Piece **board, int **move) {
 
 int verifDeplacement(Piece **board, int **move, int joueur) {
 
+    int validite;
+
+    if (board[move[0][0]][move[1][0]].typePiece == PION) { // 0 si ok, 1 sinon
+        validite = verifPion(board, move);
+        return validite;
+    } else if (board[move[0][0]][move[1][0]].typePiece == FOU) { // 0 si ok, 2 sinon
+        validite = verifFou(board, move);
+        return validite;
+    } else if (board[move[0][0]][move[1][0]].typePiece == CAVALIER) { // 0 si ok, 3 sinon
+        validite = verifCavalier(board, move);
+        return validite;
+    } else if (board[move[0][0]][move[1][0]].typePiece == TOUR) { // 0 si ok, 4 sinon
+        validite = verifTour(board, move);
+        return validite;
+    } else if (board[move[0][0]][move[1][0]].typePiece == DAME) { // 0 si ok, 5 sinon
+        validite = verifDame(board, move);
+        return validite;
+    } else if (board[move[0][0]][move[1][0]].typePiece == ROI) { // 0 si ok, 6 sinon
+        validite = verifRoi(board, move);
+        return validite;
+    } else if (board[move[0][0]][move[1][0]].typePiece == VIDE) { // 7 si case de départ Vide
+        return 7;
+    } else {
+        return 8;
+    }
 }

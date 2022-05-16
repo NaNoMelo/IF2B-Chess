@@ -16,105 +16,90 @@ int verifPion(Piece **board, int **move) {
 
     if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
         printf("Vous n'avez effectuer aucun déplacement\n");
-        return 0;
-    }
-
-    if ((board[move[0][0]][move[1][0]].nbMove == 0) && (move[0][0] - move[0][1] == 0) &&
-        (move[1][0] - move[1][1] == 2)) { //BLANC DONC VERS LE HAUT
+        return 1;
+    } else if ((board[move[0][0]][move[1][0]].nbMove == 0) && (move[0][0] - move[0][1] == 0) &&
+               (move[1][0] - move[1][1] == 2)) { //BLANC DONC VERS LE HAUT
         if (board[move[0][0]][move[1][0] - 1].typePiece == VIDE && board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 1;
+            return 0;
         } else if (board[move[0][0]][move[1][0] - 1].typePiece != VIDE ||
                    board[move[0][1]][move[1][1]].typePiece != VIDE) {
-            return 0;
-        }
-    }
-
-    if ((board[move[0][0]][move[1][0]].nbMove == 0) && (move[0][0] - move[0][1] == 0) &&
-        (move[1][0] - move[1][1] == -2)) { //NOIR DONC VERS LE BAS
-        if (board[move[0][0]][move[1][0] + 1].typePiece == VIDE && board[move[0][1]][move[1][1]].typePiece == VIDE) {
             return 1;
+        }
+    } else if ((board[move[0][0]][move[1][0]].nbMove == 0) && (move[0][0] - move[0][1] == 0) &&
+               (move[1][0] - move[1][1] == -2)) { //NOIR DONC VERS LE BAS
+        if (board[move[0][0]][move[1][0] + 1].typePiece == VIDE && board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            return 0;
         } else if (board[move[0][0]][move[1][0] + 1].typePiece != VIDE ||
                    board[move[0][1]][move[1][1]].typePiece != VIDE) {
-            return 0;
-        }
-    }
-
-    if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] == 1) { //BLANC TOUT DROIT DE 1
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
             return 1;
+        }
+    } else if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] == 1) { //BLANC TOUT DROIT DE 1
+        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            return 0;
         } else if (board[move[0][1]][move[1][1]].typePiece != VIDE) {
-            return 0;
-        }
-    }
-
-    if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] == -1) { //NOIR TOUT DROIT DE 1
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
             return 1;
+        }
+    } else if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] == -1) { //NOIR TOUT DROIT DE 1
+        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            return 0;
         } else if (board[move[0][1]][move[1][1]].typePiece != VIDE) {
-            return 0;
-        }
-    }
-
-    if (move[0][0] - move[0][1] == 1 && move[1][0] - move[1][1] == 1) { //BLANC DIAGONALE DROITE
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
             return 1;
+        }
+    } else if (move[0][0] - move[0][1] == 1 && move[1][0] - move[1][1] == 1) { //BLANC DIAGONALE DROITE
+        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            return 0;
         } else if (board[move[0][1]][move[1][1]].typePiece == board[move[0][0]][move[1][0]].typePiece) {
             printf("Vous n'avez pas le droit de manger une de vos pièces\n");
-            return 0;
+            return 1;
         } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
                    board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 1;
+            return 0;
         } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
                    board[move[0][1]][move[1][1]].typePiece == ROI) {
             printf("Vous ne pouvez pas manger un roi\n");
-            return 0;
-        }
-    }
-
-    if (move[0][0] - move[0][1] == -1 && move[1][0] - move[1][1] == 1) { //BLANC DIAGONALE GAUCHE
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
             return 1;
+        }
+    } else if (move[0][0] - move[0][1] == -1 && move[1][0] - move[1][1] == 1) { //BLANC DIAGONALE GAUCHE
+        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            return 0;
         } else if (board[move[0][1]][move[1][1]].typePiece == board[move[0][0]][move[1][0]].typePiece) {
             printf("Vous n'avez pas le droit de manger une de vos pièces\n");
-            return 0;
+            return 1;
         } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
                    board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 1;
+            return 0;
         } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
                    board[move[0][1]][move[1][1]].typePiece == ROI) {
             printf("Vous ne pouvez pas manger un roi\n");
-            return 0;
-        }
-    }
-    if (move[0][0] - move[0][1] == 1 && move[1][0] - move[1][1] == -1) { //NOIR DIAGONALE DOITE (DE A VERS Z)
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
             return 1;
+        }
+    } else if (move[0][0] - move[0][1] == 1 && move[1][0] - move[1][1] == -1) { //NOIR DIAGONALE DOITE (DE A VERS Z)
+        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            return 0;
         } else if (board[move[0][1]][move[1][1]].typePiece == board[move[0][0]][move[1][0]].typePiece) {
             printf("Vous n'avez pas le droit de manger une de vos pièces\n");
-            return 0;
+            return 1;
         } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
                    board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 1;
+            return 0;
         } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
                    board[move[0][1]][move[1][1]].typePiece == ROI) {
             printf("Vous ne pouvez pas manger un roi\n");
-            return 0;
-        }
-    }
-
-    if (move[0][0] - move[0][1] == -1 && move[1][0] - move[1][1] == -1) { //NOIR DIAGONALE GAUCHE (DE Z VERS A)
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
             return 1;
+        }
+    } else if (move[0][0] - move[0][1] == -1 && move[1][0] - move[1][1] == -1) { //NOIR DIAGONALE GAUCHE (DE Z VERS A)
+        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            return 0;
         } else if (board[move[0][1]][move[1][1]].typePiece == board[move[0][0]][move[1][0]].typePiece) {
             printf("Vous n'avez pas le droit de manger une de vos pièces\n");
-            return 0;
+            return 1;
         } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
                    board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 1;
+            return 0;
         } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
                    board[move[0][1]][move[1][1]].typePiece == ROI) {
             printf("Vous ne pouvez pas manger un roi\n");
-            return 0;
+            return 1;
         }
     }
     //si premier coup: -> peut avancer de deux cases
@@ -139,31 +124,25 @@ int verifFou(Piece **board, int **move) {
 
     if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
         printf("Vous n'avez effectuer aucun déplacement\n");
-        return 0;
-    }
-
-    if (abs((move[0][1] - move[0][0]) == abs(move[1][1] - move[1][0]))) {
+        return 2;
+    } else if (abs((move[0][1] - move[0][0]) == abs(move[1][1] - move[1][0]))) {
         for (int i = 1; i < abs((move[0][0] - move[0][1])); i++) {
             if (board[move[0][0] + i * sign(move[0][1] - move[0][0])][move[1][0] + i * sign(move[1][1] -
                                                                                             move[1][0])].typePiece !=
                 VIDE) {
-                return 0;
+                return 2;
             }
 
         }
 
         if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 2;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
             return 0;
         }
-
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 1;
-        }
-    }
-
-    if (abs((move[0][1] - move[0][0]) != abs(move[1][1] - move[1][0]))) {
-        return 0;
+    } else if (abs((move[0][1] - move[0][0]) != abs(move[1][1] - move[1][0]))) {
+        return 2;
     }
     // -> Pas de limite de déplacement mais seulement en diagonale
     // on vérifie d'abord si le coup est correct
@@ -186,52 +165,36 @@ int verifFou(Piece **board, int **move) {
 int verifCavalier(Piece **board, int **move) {
 
     if ((move[0][0] - move[0][1]) == 0 || (move[0][0] - move[0][1]) > 2) {
-        return 0;
-    }
-
-    if ((move[0][0] - move[0][1] == 2 || move[0][0] - move[0][1] == -2) &&
-        (move[1][0] - move[1][1] == 1 || move[1][0] - move[1][1] == -1)) {
+        return 3;
+    } else if ((move[0][0] - move[0][1] == 2 || move[0][0] - move[0][1] == -2) &&
+               (move[1][0] - move[1][1] == 1 || move[1][0] - move[1][1] == -1)) {
 
         if (board[move[0][1]][move[1][1]].typePiece == ROI) {
             printf("Vous ne pouvez pas manger un roi\n");
-            return 0;
-        }
-
-        if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 3;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
             printf("Vous ne pouvez pas manger vos propre pièces");
+            return 3;
+        } else if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            return 0;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
             return 0;
         }
-
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 1;
-        }
-
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 1;
-        }
-    }
-
-    if ((move[1][0] - move[1][1] == 2 || move[1][0] - move[1][1] == -2) &&
-        (move[0][0] - move[0][1] == 1 || move[0][0] - move[0][1] == -1)) {
+    } else if ((move[1][0] - move[1][1] == 2 || move[1][0] - move[1][1] == -2) &&
+               (move[0][0] - move[0][1] == 1 || move[0][0] - move[0][1] == -1)) {
 
         if (board[move[0][1]][move[1][1]].typePiece == ROI) {
             printf("Vous ne pouvez pas manger un roi\n");
-            return 0;
-        }
-
-        if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 3;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
             printf("Vous ne pouvez pas manger vos propre pièces\n");
+            return 3;
+        } else if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
             return 0;
-        }
-
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 1;
-        }
-
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 1;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+            return 0;
         }
     }
     // -> limite de déplacement en l
@@ -252,111 +215,95 @@ int verifTour(Piece **board, int **move) {
 
     if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) { //SI AUCUN MOUVEMENT
         printf("Vous n'avez effectuer aucun déplacement\n");
-        return 0;
-    }
-
-    if (move[0][0] - move[0][1] != 0 &&
-        move[1][0] - move[1][1] != 0) { //SI DEPLACEMENT VERTICALE ET HORIZONTAL EN MEME TEMPS
-        return 0;
-    }
-
-    if (move[0][0] - move[0][1] != 0 && move[1][0] - move[1][1] == 0) { //DEPLACEMENT HORIZONTAL
+        return 4;
+    } else if (move[0][0] - move[0][1] != 0 &&
+               move[1][0] - move[1][1] != 0) { //SI DEPLACEMENT VERTICALE ET HORIZONTAL EN MEME TEMPS
+        return 4;
+    } else if (move[0][0] - move[0][1] != 0 && move[1][0] - move[1][1] == 0) { //DEPLACEMENT HORIZONTAL
         if (move[0][0] - move[0][1] < 0) { //VERS LA DROITE
             for (int i = 1; i < (move[0][1] - move[0][0]); i++) {
                 if ((board[move[0][0] + i][move[1][0]].typePiece != VIDE) && ((move[0][0] + i) != move[0][1])) {
-                    return 0;
-                }
-                if ((move[0][0] + i) == move[0][1]) {
+                    return 4;
+                } else if ((move[0][0] + i) == move[0][1]) {
                     if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-                        return 1;
-                    }
-                    if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-                        board[move[0][1]][move[1][1]].typePiece != ROI) {
-                        return 1;
-                    }
-                    if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+                        return 0;
+                    } else if (
+                            board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                            board[move[0][1]][move[1][1]].typePiece != ROI) {
+                        return 0;
+                    } else if (board[move[0][1]][move[1][1]].couleurPiece ==
+                               board[move[0][0]][move[1][0]].couleurPiece) {
                         printf("Vous ne pouvez pas manger vos propre pièces\n");
-                        return 0;
-                    }
-                    if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+                        return 4;
+                    } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
                         printf("Vous ne pouvez pas manger un roi\n");
-                        return 0;
+                        return 4;
                     }
                 }
             }
-        }
-        if (move[0][0] - move[0][1] > 0) { //VERS LA GAUCHE
+        } else if (move[0][0] - move[0][1] > 0) { //VERS LA GAUCHE
             for (int i = 1; i < (move[0][0] - move[0][1]); i++) {
                 if ((board[move[0][0] - i][move[1][0]].typePiece != VIDE) && ((move[0][0] - i) != move[0][1])) {
-                    return 0;
-                }
-                if ((move[0][0] - i) == move[0][1]) {
+                    return 4;
+                } else if ((move[0][0] - i) == move[0][1]) {
                     if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-                        return 1;
-                    }
-                    if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-                        board[move[0][1]][move[1][1]].typePiece != ROI) {
-                        return 1;
-                    }
-                    if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+                        return 0;
+                    } else if (
+                            board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                            board[move[0][1]][move[1][1]].typePiece != ROI) {
+                        return 0;
+                    } else if (board[move[0][1]][move[1][1]].couleurPiece ==
+                               board[move[0][0]][move[1][0]].couleurPiece) {
                         printf("Vous ne pouvez pas manger vos propre pièces\n");
-                        return 0;
-                    }
-                    if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+                        return 1;
+                    } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
                         printf("Vous ne pouvez pas manger un roi\n");
-                        return 0;
+                        return 1;
                     }
                 }
             }
         }
-    }
-
-    if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] != 0) { //DEPLACEMENT VERTICAL
+    } else if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] != 0) { //DEPLACEMENT VERTICAL
         if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] != 0) {
             if (move[1][0] - move[1][1] < 0) { //VERS LE BAS
                 for (int i = 1; i < (move[1][1] - move[1][0]); i++) {
                     if ((board[move[0][0]][move[1][0] + i].typePiece != VIDE) && ((move[1][0] + i) != move[1][1])) {
-                        return 0;
-                    }
-                    if ((move[1][0] + i) == move[1][1]) {
+                        return 4;
+                    } else if ((move[1][0] + i) == move[1][1]) {
                         if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-                            return 1;
-                        }
-                        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-                            board[move[0][1]][move[1][1]].typePiece != ROI) {
-                            return 1;
-                        }
-                        if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+                            return 0;
+                        } else if (board[move[0][1]][move[1][1]].couleurPiece !=
+                                   board[move[0][0]][move[1][0]].couleurPiece &&
+                                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+                            return 0;
+                        } else if (board[move[0][1]][move[1][1]].couleurPiece ==
+                                   board[move[0][0]][move[1][0]].couleurPiece) {
                             printf("Vous ne pouvez pas manger vos propre pièces\n");
-                            return 0;
-                        }
-                        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+                            return 4;
+                        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
                             printf("Vous ne pouvez pas manger un roi\n");
-                            return 0;
+                            return 4;
                         }
                     }
                 }
-            }
-            if (move[1][0] - move[1][1] > 0) { //VERS LE HAUT
+            } else if (move[1][0] - move[1][1] > 0) { //VERS LE HAUT
                 for (int i = 1; i < (move[1][0] - move[1][1]); i++) {
                     if ((board[move[0][0]][move[1][0] - i].typePiece != VIDE) && ((move[1][0] - i) != move[1][1])) {
-                        return 0;
-                    }
-                    if ((move[1][0] - i) == move[1][1]) {
+                        return 4;
+                    } else if ((move[1][0] - i) == move[1][1]) {
                         if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-                            return 1;
-                        }
-                        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-                            board[move[0][1]][move[1][1]].typePiece != ROI) {
-                            return 1;
-                        }
-                        if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+                            return 0;
+                        } else if (board[move[0][1]][move[1][1]].couleurPiece !=
+                                   board[move[0][0]][move[1][0]].couleurPiece &&
+                                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+                            return 0;
+                        } else if (board[move[0][1]][move[1][1]].couleurPiece ==
+                                   board[move[0][0]][move[1][0]].couleurPiece) {
                             printf("Vous ne pouvez pas manger vos propre pièces\n");
-                            return 0;
-                        }
-                        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+                            return 4;
+                        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
                             printf("Vous ne pouvez pas manger un roi\n");
-                            return 0;
+                            return 4;
                         }
                     }
                 }
@@ -405,130 +352,112 @@ int verifDame(Piece **board, int **move) {
 
     if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
         printf("Vous n'avez effectuer aucun déplacement\n");
-        return 0;
-    }
-
-    if (move[0][0] - move[0][1] != 0 && move[1][0] - move[1][1] == 0) { //DEPLACEMENT HORIZONTAL
+        return 5;
+    } else if (move[0][0] - move[0][1] != 0 && move[1][0] - move[1][1] == 0) { //DEPLACEMENT HORIZONTAL
         if (move[0][0] - move[0][1] < 0) { //VERS LA DROITE
             for (int i = 1; i < (move[0][1] - move[0][0]); i++) {
                 if ((board[move[0][0] + i][move[1][0]].typePiece != VIDE) && ((move[0][0] + i) != move[0][1])) {
-                    return 0;
-                }
-                if ((move[0][0] + i) == move[0][1]) {
+                    return 5;
+                } else if ((move[0][0] + i) == move[0][1]) {
                     if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-                        return 1;
-                    }
-                    if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-                        board[move[0][1]][move[1][1]].typePiece != ROI) {
-                        return 1;
-                    }
-                    if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+                        return 0;
+                    } else if (
+                            board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                            board[move[0][1]][move[1][1]].typePiece != ROI) {
+                        return 0;
+                    } else if (board[move[0][1]][move[1][1]].couleurPiece ==
+                               board[move[0][0]][move[1][0]].couleurPiece) {
                         printf("Vous ne pouvez pas manger vos propre pièces\n");
-                        return 0;
-                    }
-                    if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+                        return 5;
+                    } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
                         printf("Vous ne pouvez pas manger un roi\n");
-                        return 0;
+                        return 5;
                     }
                 }
             }
-        }
-        if (move[0][0] - move[0][1] > 0) { //VERS LA GAUCHE
+        } else if (move[0][0] - move[0][1] > 0) { //VERS LA GAUCHE
             for (int i = 1; i < (move[0][0] - move[0][1]); i++) {
                 if ((board[move[0][0] - i][move[1][0]].typePiece != VIDE) && ((move[0][0] - i) != move[0][1])) {
-                    return 0;
-                }
-                if ((move[0][0] - i) == move[0][1]) {
+                    return 5;
+                } else if ((move[0][0] - i) == move[0][1]) {
                     if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-                        return 1;
-                    }
-                    if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-                        board[move[0][1]][move[1][1]].typePiece != ROI) {
-                        return 1;
-                    }
-                    if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+                        return 0;
+                    } else if (
+                            board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                            board[move[0][1]][move[1][1]].typePiece != ROI) {
+                        return 0;
+                    } else if (board[move[0][1]][move[1][1]].couleurPiece ==
+                               board[move[0][0]][move[1][0]].couleurPiece) {
                         printf("Vous ne pouvez pas manger vos propre pièces\n");
-                        return 0;
-                    }
-                    if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+                        return 5;
+                    } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
                         printf("Vous ne pouvez pas manger un roi\n");
-                        return 0;
+                        return 5;
                     }
                 }
             }
         }
-    }
-
-    if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] != 0) { //DEPLACEMENT VERTICAL
+    } else if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] != 0) { //DEPLACEMENT VERTICAL
         if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] != 0) {
             if (move[1][0] - move[1][1] < 0) { //VERS LE BAS
                 for (int i = 1; i < (move[1][1] - move[1][0]); i++) {
                     if ((board[move[0][0]][move[1][0] + i].typePiece != VIDE) && ((move[1][0] + i) != move[1][1])) {
-                        return 0;
-                    }
-                    if ((move[1][0] + i) == move[1][1]) {
+                        return 5;
+                    } else if ((move[1][0] + i) == move[1][1]) {
                         if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-                            return 1;
-                        }
-                        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-                            board[move[0][1]][move[1][1]].typePiece != ROI) {
-                            return 1;
-                        }
-                        if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+                            return 0;
+                        } else if (board[move[0][1]][move[1][1]].couleurPiece !=
+                                   board[move[0][0]][move[1][0]].couleurPiece &&
+                                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+                            return 0;
+                        } else if (board[move[0][1]][move[1][1]].couleurPiece ==
+                                   board[move[0][0]][move[1][0]].couleurPiece) {
                             printf("Vous ne pouvez pas manger vos propre pièces\n");
-                            return 0;
-                        }
-                        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+                            return 5;
+                        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
                             printf("Vous ne pouvez pas manger un roi\n");
-                            return 0;
+                            return 5;
                         }
                     }
                 }
-            }
-            if (move[1][0] - move[1][1] > 0) { //VERS LE HAUT
+            } else if (move[1][0] - move[1][1] > 0) { //VERS LE HAUT
                 for (int i = 1; i < (move[1][0] - move[1][1]); i++) {
                     if ((board[move[0][0]][move[1][0] - i].typePiece != VIDE) && ((move[1][0] - i) != move[1][1])) {
-                        return 0;
-                    }
-                    if ((move[1][0] - i) == move[1][1]) {
+                        return 5;
+                    } else if ((move[1][0] - i) == move[1][1]) {
                         if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-                            return 1;
-                        }
-                        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-                            board[move[0][1]][move[1][1]].typePiece != ROI) {
-                            return 1;
-                        }
-                        if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+                            return 0;
+                        } else if (board[move[0][1]][move[1][1]].couleurPiece !=
+                                   board[move[0][0]][move[1][0]].couleurPiece &&
+                                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+                            return 0;
+                        } else if (board[move[0][1]][move[1][1]].couleurPiece ==
+                                   board[move[0][0]][move[1][0]].couleurPiece) {
                             printf("Vous ne pouvez pas manger vos propre pièces\n");
-                            return 0;
-                        }
-                        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+                            return 5;
+                        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
                             printf("Vous ne pouvez pas manger un roi\n");
-                            return 0;
+                            return 5;
                         }
                     }
                 }
             }
         }
-    }
-
-    if (abs((move[0][1] - move[0][0]) == abs(move[1][1] - move[1][0]))) {
+    } else if (abs((move[0][1] - move[0][0]) == abs(move[1][1] - move[1][0]))) {
         for (int i = 1; i < abs((move[0][0] - move[0][1])); i++) {
             if (board[move[0][0] + i * sign(move[0][1] - move[0][0])][move[1][0] + i * sign(move[1][1] -
                                                                                             move[1][0])].typePiece !=
                 VIDE) {
-                return 0;
+                return 5;
             }
 
         }
 
         if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 5;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
             return 0;
-        }
-
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 1;
         }
     }
 }
@@ -537,145 +466,109 @@ int verifRoi(Piece **board, int **move) {
 
     if (move[0][1] - move[0][0] == 1 && move[1][1] - move[1][0] == 0) { //DROITE
         if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
+            return 0;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
             return 0;
         }
-        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
-            return 0;
-        }
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-    }
-
-    if (move[0][1] - move[0][0] == -1 && move[1][1] - move[1][0] == 0) { //GAUCHE
+    } else if (move[0][1] - move[0][0] == -1 && move[1][1] - move[1][0] == 0) { //GAUCHE
         if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
+            return 0;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
             return 0;
         }
-        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
-            return 0;
-        }
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-    }
-
-    if (move[0][1] - move[0][0] == 0 && move[1][1] - move[1][0] == 1) { //HAUT
+    } else if (move[0][1] - move[0][0] == 0 && move[1][1] - move[1][0] == 1) { //HAUT
         if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
+            return 0;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
             return 0;
         }
-        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
-            return 0;
-        }
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-    }
-
-    if (move[0][1] - move[0][0] == 0 && move[1][1] - move[1][0] == -1) { //BAS
+    } else if (move[0][1] - move[0][0] == 0 && move[1][1] - move[1][0] == -1) { //BAS
         if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
+            return 0;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
             return 0;
         }
-        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
-            return 0;
-        }
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-    }
-
-    if (move[0][1] - move[0][0] == 1 && move[1][1] - move[1][0] == 1) { //HAUT DROITE
+    } else if (move[0][1] - move[0][0] == 1 && move[1][1] - move[1][0] == 1) { //HAUT DROITE
         if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
+            return 0;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
             return 0;
         }
-        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
-            return 0;
-        }
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-    }
-
-    if (move[0][1] - move[0][0] == 1 && move[1][1] - move[1][0] == -1) { //BAS DROITE
+    } else if (move[0][1] - move[0][0] == 1 && move[1][1] - move[1][0] == -1) { //BAS DROITE
         if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
+            return 0;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
             return 0;
         }
-        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
-            return 0;
-        }
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-    }
-
-    if (move[0][1] - move[0][0] == -1 && move[1][1] - move[1][0] == 1) { //HAUT GAUCHE
+    } else if (move[0][1] - move[0][0] == -1 && move[1][1] - move[1][0] == 1) { //HAUT GAUCHE
         if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
+            return 0;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
+            //vérifie si pas echec si echec return 0 si pas echec return 1
             return 0;
         }
-        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
-            return 0;
-        }
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
-            //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-    }
-
-    if (move[0][1] - move[0][0] == -1 && move[1][1] - move[1][0] == -1) { //BAS GAUCHE
+    } else if (move[0][1] - move[0][0] == -1 && move[1][1] - move[1][0] == -1) { //BAS GAUCHE
         if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
-            return 0;
-        }
-        if (board[move[0][1]][move[1][1]].typePiece == ROI) {
-            return 0;
-        }
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == ROI) {
+            return 6;
+        } else if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
             //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
-        }
-        if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-            board[move[0][1]][move[1][1]].typePiece != ROI) {
+            return 0;
+        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
+                   board[move[0][1]][move[1][1]].typePiece != ROI) {
             //vérifie si pas echec si echec return 0 si pas echec return 1
-            return 1;
+            return 0;
         }
     }
 }
+
+int verifEchec(Piece **board, int **move, int taillePlateau);
