@@ -5,13 +5,13 @@
 #ifndef IF2B_CHESS_BOARD_H
 #define IF2B_CHESS_BOARD_H
 typedef enum {
-    VIDE, PION, FOU, CAVALIER, TOUR, REINE, ROI
-    //0   1    2         3     4      5
+    VIDE, PION, FOU, CAVALIER, TOUR, DAME, ROI
+    //0   1     2    3         4     5     6
 } TypePiece;
 
 typedef enum {
-    NONE, NOIR, BLANC
-    //0   1
+    NONE, BLANC, NOIR
+    //0   1      2
 } CouleurPiece;
 
 typedef struct {
@@ -24,7 +24,8 @@ void genererPlateau(int taille, Piece **board);
 
 void afficherPlateau(int taille, Piece **board);
 
+void executeMove(Piece **board, int **move);
 
-void verifDeplacement(Piece **board, int **move);
+int verifDeplacement(Piece **board, int **move, int joueur);
 
 #endif //IF2B_CHESS_BOARD_H

@@ -36,30 +36,43 @@ void askDeplacement(int taillePlateau, int joueur, int **move) {
     char unparsedMove[10];
     do {
         state = 0;
+        move[0][0] = -1;
+        move[0][1] = -1;
+        move[1][0] = -1;
+        move[1][1] = -1;
         printf("Deplacement du joueur %d:\n", joueur + 1);
         fflush(stdin);
         scanf("%s", &unparsedMove);
         strupr(unparsedMove);
         for (int i = 0; i < strlen(unparsedMove); ++i) {
+            while (unparsedMove[i] == ' ') { i++; }
             if (state % 2) {
                 if (isdigit(unparsedMove[i]) && unparsedMove[i] - '0' > 0 && unparsedMove[i] - '0' <= taillePlateau) {
-                    move[1][(state - 1) / 2] = unparsedMove[i] - '0';
-                    if (isdigit(unparsedMove[i + 1]) && unparsedMove[i + 1] - '0' > 0 &&
+                    if (isdigit(unparsedMove[i + 1]) && unparsedMove[i + 1] - '0' >= 0 &&
                         unparsedMove[i + 1] - '0' <= taillePlateau) {
+                        move[1][(state - 1) / 2] = (unparsedMove[i - 1] - '0') * 10 + unparsedMove[i] -
+                                                   '0';
                         i++;
-                        move[1][(state - 1) / 2] *= 10;
-                        move[1][(state - 1) / 2] += unparsedMove[i];
+                    } else {
+                        move[1][(state - 1) / 2] = unparsedMove[i] - '0' - 1;
                     }
+                } else {
+                    printf("Mouvement invalide\n");
+                    break;
                 }
             } else {
                 if (unparsedMove[i] >= 65 && unparsedMove[i] < 65 + taillePlateau) {
-                    move[0][state / 2] = unparsedMove[i] - 64;
+                    move[0][state / 2] = unparsedMove[i] - 65;
+                } else {
+                    printf("Mouvement invalide\n");
+                    break;
                 }
             }
             state++;
         }
-        printf("%d %d\n%d %d", move[0][0], move[0][1], move[1][0], move[1][1]);
-    } while (!(move[0][0] && move[0][1] && move[1][0] && move[1][1]));
+
+        printf("%d %d\n%d %d\n", move[0][0], move[0][1], move[1][0], move[1][1]);
+    } while (!(move[0][0] + 1 && move[0][1] + 1 && move[1][0] + 1 && move[1][1] + 1));
 }
 
 int sign(int nombre) {

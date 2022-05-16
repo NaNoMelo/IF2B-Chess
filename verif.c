@@ -11,7 +11,6 @@
 #include <time.h>
 #include <math.h>
 #include "ctype.h"
-#include "board.h"
 
 int verifPion(Piece **board, int **move) {
 

@@ -36,13 +36,15 @@ int main() {
             return 0;
     }
     while (partie == true) {
-        joueur = tour % 2;
+        joueur = tour % 2; //si joueur Blanc : 0, si joueur Noir alors 1
         afficherPlateau(taillePlateau, board);
+//        do {
         askDeplacement(taillePlateau, joueur, move);
-
+//        }while(!verifDeplacement(board,move,joueur));
+        executeMove(board, move);
 
         tour++;
-        partie = false;
+
     }
 
 

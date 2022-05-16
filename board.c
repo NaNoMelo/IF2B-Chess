@@ -36,15 +36,15 @@ void genererPlateau(int taille, Piece **board) {
 void afficherPlateau(int taille, Piece **board) {
     char lettres[] = {" abcdefghijkl"};
     char pieces[] = {"-PFCTDR"};
-    char couleurs[] = {" NB"};
+    char couleurs[] = {" BN"};
     for (int y = 0; y <= taille; y++) {
         for (int x = 0; x <= taille; ++x) {
             if (y == 0) {
                 printf(" %c ", lettres[x]);
             } else {
                 if (x == 0) {
-                    printf(" %d", taille - y + 1);
-                    if (taille - y + 1 < 10) printf(" ");
+                    printf(" %d", y);
+                    if (y < 10) printf(" ");
                 } else {
                     printf(" %c%c", pieces[board[x - 1][y - 1].typePiece],
                            couleurs[board[x - 1][y - 1].couleurPiece]);
@@ -56,6 +56,12 @@ void afficherPlateau(int taille, Piece **board) {
     }
 }
 
-void verifDeplacement(Piece **board, int **move) {
+void executeMove(Piece **board, int **move) {
+    board[move[0][1]][move[1][1]] = board[move[0][0]][move[1][0]];
+    board[move[0][1]][move[1][1]].nbMove++;
+    board[move[0][0]][move[1][0]] = (Piece) {VIDE, NONE, 0};
+}
+
+int verifDeplacement(Piece **board, int **move, int joueur) {
 
 }

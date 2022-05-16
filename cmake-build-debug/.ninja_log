@@ -1,5 +1,10 @@
 # ninja log v5
-2	252	6741517780201571	CMakeFiles/IF2B_Chess.dir/main.c.obj	dcb5f493a38d4ee1
-86	174	6741519354836734	IF2B_Chess.exe	d98a1c03dc73b975
-2	86	6741519353982235	CMakeFiles/IF2B_Chess.dir/saisie.c.obj	5763da487274fed0
-90	625	6740431829795544	CMakeFiles/IF2B_Chess.dir/board.c.obj	37ea48325e48a15c
+6	97	6744128701188430	CMakeFiles/IF2B_Chess.dir/main.c.obj	dcb5f493a38d4ee1
+125	220	6744127164479351	IF2B_Chess.exe	d98a1c03dc73b975
+2	69	6744125361468938	CMakeFiles/IF2B_Chess.dir/saisie.c.obj	5763da487274fed0
+8	108	6744128701298485	CMakeFiles/IF2B_Chess.dir/board.c.obj	37ea48325e48a15c
+7	90	6744130171476848	CMakeFiles/IF2B_Chess.dir/main.c.obj	dcb5f493a38d4ee1
+5	95	6744130171516842	CMakeFiles/IF2B_Chess.dir/board.c.obj	37ea48325e48a15c
+2	98	6744130171556840	CMakeFiles/IF2B_Chess.dir/saisie.c.obj	5763da487274fed0
+10	157	6744130172146842	CMakeFiles/IF2B_Chess.dir/verif.c.obj	8bf030c619a8fbbc
+157	230	6744130172837469	IF2B_Chess.exe	21b828fc593ccf9d
