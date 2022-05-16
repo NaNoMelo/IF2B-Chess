@@ -31,7 +31,7 @@ int askTaillePlateau() {
     return t;
 }
 
-void askDeplacement(int taillePlateau, int joueur, int **move) {
+int askDeplacement(int taillePlateau, int joueur, int **move) {
     int state;
     char unparsedMove[10];
     int number;
@@ -45,6 +45,8 @@ void askDeplacement(int taillePlateau, int joueur, int **move) {
         fflush(stdin);
         scanf("%s", &unparsedMove);
         strupr(unparsedMove);
+        printf("%s", unparsedMove);
+        if (strcmp(unparsedMove, "S\0") == 0) return 1;
         for (int i = 0; i < strlen(unparsedMove); ++i) {
             while (unparsedMove[i] == ' ') { i++; }
             if (state % 2) {
@@ -68,6 +70,7 @@ void askDeplacement(int taillePlateau, int joueur, int **move) {
         }
         printf("%d %d\n%d %d\n", move[0][0], move[0][1], move[1][0], move[1][1]);
     } while (!(move[0][0] + 1 && move[0][1] + 1 && move[1][0] + 1 && move[1][1] + 1));
+    return 0;
 }
 
 int sign(int nombre) {
