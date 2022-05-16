@@ -7,8 +7,11 @@
 #include "saisie.h"
 #include "board.h"
 #include "verif.h"
+#include "save.h"
 
 int main() {
+    FILE *save;
+    save = fopen("./save.txt", "r+");
     Piece **board;
     int taillePlateau, **move, tour, joueur;
     move = (int **) malloc(sizeof(int *) * 2);
@@ -29,17 +32,21 @@ int main() {
         }
         case 2:
             printf("load");
+            loadGame();
             break;
 
         case 3:
             printf("quit");
-            return 0;
+            exit(0);
     }
     while (partie == true) {
         joueur = tour % 2; //si joueur Blanc : 0, si joueur Noir alors 1
         afficherPlateau(taillePlateau, board);
 //        do {
-        askDeplacement(taillePlateau, joueur, move);
+        if (askDeplacement(taillePlateau, joueur, move)) {
+            saveGame(save, board, taillePlateau, tour);
+            exit(0);
+        }
 //        }while(!verifDeplacement(board,move,joueur));
         executeMove(board, move);
 

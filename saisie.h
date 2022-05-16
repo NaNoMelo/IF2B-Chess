@@ -9,7 +9,7 @@ int askMenu();
 
 int askTaillePlateau();
 
-void askDeplacement(int taillePlateau, int joueur, int **move);
+int askDeplacement(int taillePlateau, int joueur, int **move);
 
 int sign(int nombre);
 
