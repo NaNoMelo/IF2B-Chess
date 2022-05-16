@@ -11,4 +11,6 @@ int askTaillePlateau();
 
 void askDeplacement(int taillePlateau, int joueur, int **move);
 
+int sign(int nombre);
+
 #endif //IF2B_CHESS_SAISIE_H

@@ -27,16 +27,4 @@ void afficherPlateau(int taille, Piece **board);
 
 void verifDeplacement(Piece **board, int **move);
 
-int verifPion(Piece **board, int **move);
-
-int verifFou(Piece **board, int **move);
-
-int verifCavalier(Piece **board, int **move);
-
-int verifTour(Piece **board, int **move);
-
-int verifReine(Piece **board, int **move);
-
-int verifRoi(Piece **board, int **move);
-
 #endif //IF2B_CHESS_BOARD_H

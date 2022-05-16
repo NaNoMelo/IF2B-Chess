@@ -6,6 +6,7 @@
 #include <math.h>
 #include "saisie.h"
 #include "board.h"
+#include "verif.h"
 
 int main() {
     Piece **board;

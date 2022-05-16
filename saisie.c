@@ -10,6 +10,8 @@
 #include <time.h>
 #include <math.h>
 #include "ctype.h"
+#include "verif.h"
+#include "board.h"
 
 int askMenu() {
     int m;
@@ -58,4 +60,8 @@ void askDeplacement(int taillePlateau, int joueur, int **move) {
         }
         printf("%d %d\n%d %d", move[0][0], move[0][1], move[1][0], move[1][1]);
     } while (!(move[0][0] && move[0][1] && move[1][0] && move[1][1]));
+}
+
+int sign(int nombre) {
+    return ((nombre > 0) - (nombre < 0));
 }
