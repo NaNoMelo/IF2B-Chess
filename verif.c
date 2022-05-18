@@ -396,7 +396,7 @@ int verifTour(Piece **board, int **move) {
 
 int verifDame(Piece **board, int **move) {
     int tour = verifTour(board, move), fou = verifFou(board, move);
-    if (!(tour || fou)) {
+    if (tour == 0 || fou == 0) {
         return 0;
     } else if (tour > fou) {
         return tour;
@@ -626,5 +626,5 @@ int verifRoi(Piece **board, int **move) {
 }
 
 int verifEchec(Piece **board, int **move, int taillePlateau) {
-
+    return 0;
 }

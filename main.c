@@ -13,7 +13,7 @@ int main() {
     FILE *save = fopen("./save.txt", "r+");
     if (save == NULL) save = fopen("./save.txt", "w");
     Piece **board;
-    int taillePlateau, **move, tour, joueur;
+    int taillePlateau, **move, tour, joueur, action;
     move = (int **) malloc(sizeof(int *) * 2);
     for (int i = 0; i < 2; i++) {
         move[i] = (int *) malloc(sizeof(int) * 2);
@@ -58,17 +58,21 @@ int main() {
             exit(1);
     }
     while (partie == true) {
-        joueur = tour % 2 + 1; //si joueur Blanc : 0, si joueur Noir alors 1
+        joueur = tour % 2 + 1; //si joueur Blanc : 1, si joueur Noir : 2
         afficherPlateau(taillePlateau, board);
         do {
-            if (askDeplacement(taillePlateau, joueur, move)) {
-                if (save != NULL) {
-                    saveGame(save, board, taillePlateau, tour);
-                    exit(0);
-                } else {
-                    printf("fichier invalide");
+            do {
+                action = askDeplacement(taillePlateau, joueur, move);
+                switch (action) {
+                    default:
+                        break;
+                    case 1:
+                        saveGame(save, board, taillePlateau, tour);
+                        break;
+                    case 2:
+                        exit(0);
                 }
-            }
+            } while (action);
         } while (verifDeplacement(board, move, joueur));
         executeMove(board, move);
 
