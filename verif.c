@@ -571,4 +571,6 @@ int verifRoi(Piece **board, int **move) {
     }
 }
 
-int verifEchec(Piece **board, int **move, int taillePlateau);
+int verifEchec(Piece **board, int **move, int taillePlateau) {
+
+}

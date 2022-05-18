@@ -19,12 +19,16 @@ int main() {
         move[i] = (int *) malloc(sizeof(int) * 2);
     }
     bool partie = true;
-    switch (askMenu()) {
+    int menu;
+    do {
+        menu = askMenu();
+    } while (menu > 3 || menu < 1);
+    switch (menu) {
         case 2:
             printf("load");
-            fscanf(save, "%d", taillePlateau);
+            fscanf(save, "%d", &taillePlateau);
             printf("%d", taillePlateau);
-            if (taillePlateau == NULL) {
+            if (taillePlateau > 12 || taillePlateau < 6) {
                 printf("Echec du chargement de la partie, creation d'une nouvelle partie.\n");
             } else {
                 //loadGame();
@@ -35,7 +39,7 @@ int main() {
             taillePlateau = askTaillePlateau();
             board = (Piece **) malloc(sizeof(Piece *) * taillePlateau);
             for (int i = 0; i < taillePlateau; i++) {
-                board[i] = malloc(sizeof(Piece) * taillePlateau);
+                board[i] = (Piece *) malloc(sizeof(Piece) * taillePlateau);
             }
             genererPlateau(taillePlateau, board);
             tour = 0;
@@ -45,6 +49,9 @@ int main() {
         case 3:
             printf("quit");
             exit(0);
+
+        default:
+            exit(1);
     }
     while (partie == true) {
         joueur = tour % 2; //si joueur Blanc : 0, si joueur Noir alors 1

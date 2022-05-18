@@ -17,7 +17,6 @@ int verifDame(Piece **board, int **move);
 
 int verifRoi(Piece **board, int **move);
 
-int verifEchec(Piece **board, int **move, int taillPlateau) {
-}
+int verifEchec(Piece **board, int **move, int taillPlateau);
 
 #endif //IF2B_CHESS_VERIF_H
