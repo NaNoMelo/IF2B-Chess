@@ -12,6 +12,41 @@
 #include <math.h>
 #include "ctype.h"
 
+int verifMouvement(Piece **board, int **move, int *piece) {
+    int validite;
+    switch (board[move[0][0]][move[1][0]].typePiece) {
+        case VIDE:
+            validite = 1;
+            *piece = 0;
+            break;
+        case PION:
+            validite = verifPion(board, move);
+            *piece = 1;
+            break;
+        case FOU:
+            validite = verifFou(board, move);
+            *piece = 2;
+            break;
+        case CAVALIER:
+            validite = verifCavalier(board, move);
+            *piece = 3;
+            break;
+        case TOUR:
+            validite = verifTour(board, move);
+            *piece = 4;
+            break;
+        case DAME:
+            validite = verifDame(board, move);
+            *piece = 5;
+            break;
+        case ROI:
+            validite = verifRoi(board, move);
+            *piece = 6;
+            break;
+    }
+    return validite;
+}
+
 int verifPion(Piece **board, int **move) {
 
     if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
@@ -122,10 +157,7 @@ int verifPion(Piece **board, int **move) {
 
 int verifFou(Piece **board, int **move) {
 
-    if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
-        printf("Vous n'avez effectuer aucun déplacement\n");
-        return 2;
-    } else if (abs((move[0][1] - move[0][0]) == abs(move[1][1] - move[1][0]))) {
+    if (abs((move[0][1] - move[0][0]) == abs(move[1][1] - move[1][0]))) {
         for (int i = 1; i < abs((move[0][0] - move[0][1])); i++) {
             if (board[move[0][0] + i * sign(move[0][1] - move[0][0])][move[1][0] + i * sign(move[1][1] -
                                                                                             move[1][0])].typePiece !=
@@ -141,8 +173,8 @@ int verifFou(Piece **board, int **move) {
                    board[move[0][1]][move[1][1]].typePiece != ROI) {
             return 0;
         }
-    } else if (abs((move[0][1] - move[0][0]) != abs(move[1][1] - move[1][0]))) {
-        return 2;
+    } else {
+        return 1;
     }
     // -> Pas de limite de déplacement mais seulement en diagonale
     // on vérifie d'abord si le coup est correct

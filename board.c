@@ -63,31 +63,25 @@ void executeMove(Piece **board, int **move) {
 }
 
 int verifDeplacement(Piece **board, int **move, int joueur) {
-
-    int validite;
-    switch (board[move[0][0]][move[1][0]].typePiece) {
-        case VIDE:
-            validite = 7;
-            break;
-        case PION:
-            validite = verifPion(board, move);
-            break;
-        case FOU:
-            validite = verifFou(board, move);
-            break;
-        case CAVALIER:
-            validite = verifCavalier(board, move);
-            break;
-        case TOUR:
-            validite = verifTour(board, move);
-            break;
-        case DAME:
-            validite = verifDame(board, move);
-            break;
-        case ROI:
-            validite = verifRoi(board, move);
-            break;
+    int validite, piece;
+    if (board[move[0][0]][move[1][0]].typePiece == VIDE) {
+        validite = 1;       // mouvement case vide
+    } else if (board[move[0][0]][move[1][0]].couleurPiece != joueur) {
+        validite = 2;       //mouvement pièce autre joueur
+    } else if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
+        validite = 3;       //pas de déplacement
+    } else {
+        validite = verifMouvement(board, move, &piece);
+        printf("Piece : %d\n", piece);
+        if (validite) {
+            //4 si move illegal
+            //5 si piece sur le chemin
+        } else if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
+            validite = 6;   //mange propre piece
+        } else if (verifEchec(board, move, 12)) {
+            validite = 7;   //echec
+        }
     }
-    printf("Code : %d\n", validite);
+    err(validite);
     return validite;
 }

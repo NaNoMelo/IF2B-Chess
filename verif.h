@@ -4,7 +4,11 @@
 
 #ifndef IF2B_CHESS_VERIF_H
 #define IF2B_CHESS_VERIF_H
+
 #include "board.h"
+
+int verifMouvement(Piece **board, int **move, int *piece);
+
 int verifPion(Piece **board, int **move);
 
 int verifFou(Piece **board, int **move);

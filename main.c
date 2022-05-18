@@ -58,18 +58,18 @@ int main() {
             exit(1);
     }
     while (partie == true) {
-        joueur = tour % 2; //si joueur Blanc : 0, si joueur Noir alors 1
+        joueur = tour % 2 + 1; //si joueur Blanc : 0, si joueur Noir alors 1
         afficherPlateau(taillePlateau, board);
-//        do {
-        if (askDeplacement(taillePlateau, joueur, move)) {
-            if (save != NULL) {
-                saveGame(save, board, taillePlateau, tour);
-                exit(0);
-            } else {
-                printf("fichier invalide");
+        do {
+            if (askDeplacement(taillePlateau, joueur, move)) {
+                if (save != NULL) {
+                    saveGame(save, board, taillePlateau, tour);
+                    exit(0);
+                } else {
+                    printf("fichier invalide");
+                }
             }
-        }
-//        }while(!verifDeplacement(board,move,joueur));
+        } while (verifDeplacement(board, move, joueur));
         executeMove(board, move);
 
         tour++;

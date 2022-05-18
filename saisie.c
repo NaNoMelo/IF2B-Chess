@@ -41,7 +41,7 @@ int askDeplacement(int taillePlateau, int joueur, int **move) {
         move[0][1] = -1;
         move[1][0] = -1;
         move[1][1] = -1;
-        printf("Deplacement du joueur %d:\n", joueur + 1);
+        printf("Deplacement du joueur %d:\n", joueur);
         fflush(stdin);
         scanf("%s", &unparsedMove);
         strupr(unparsedMove);
@@ -74,4 +74,34 @@ int askDeplacement(int taillePlateau, int joueur, int **move) {
 
 int sign(int nombre) {
     return ((nombre > 0) - (nombre < 0));
+}
+
+void err(int validite) {
+    switch (validite) {
+        default:
+            printf("Code erreur non supporte\n");
+            break;
+        case 0:
+            break;
+        case 1:
+            printf("Mouvement case vide\n");
+            break;
+        case 2:
+            printf("Mouvement piece autre joueur\n");
+            break;
+        case 3:
+            printf("Pas de deplacement\n");
+            break;
+        case 4:
+            printf("Mouvement illegal\n");
+            break;
+        case 5:
+            printf("Piece sur le chemin\n");
+            break;
+        case 6:
+            printf("Mange propre piece\n");
+            break;
+        case 7:
+            printf("Echec\n");
+    }
 }
