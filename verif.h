@@ -13,7 +13,7 @@ int verifPion(Piece **board, int **move);
 
 int verifFou(Piece **board, int **move);
 
-int verifCavalier(Piece **board, int **move);
+int verifCavalier(int **move);
 
 int verifTour(Piece **board, int **move);
 

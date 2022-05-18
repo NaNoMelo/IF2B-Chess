@@ -13,6 +13,6 @@ int askDeplacement(int taillePlateau, int joueur, int **move);
 
 int sign(int nombre);
 
-void err(int validite);
+void printErr(int validite);
 
 #endif //IF2B_CHESS_SAISIE_H

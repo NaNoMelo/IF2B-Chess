@@ -65,7 +65,7 @@ void executeMove(Piece **board, int **move) {
 int verifDeplacement(Piece **board, int **move, int joueur) {
     int validite, piece;
     if (board[move[0][0]][move[1][0]].typePiece == VIDE) {
-        validite = 1;       // mouvement case vide
+        validite = 1;       //mouvement case vide
     } else if (board[move[0][0]][move[1][0]].couleurPiece != joueur) {
         validite = 2;       //mouvement pièce autre joueur
     } else if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
@@ -82,6 +82,6 @@ int verifDeplacement(Piece **board, int **move, int joueur) {
             validite = 7;   //echec
         }
     }
-    err(validite);
+    printErr(validite);
     return validite;
 }

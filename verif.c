@@ -28,7 +28,7 @@ int verifMouvement(Piece **board, int **move, int *piece) {
             *piece = 2;
             break;
         case CAVALIER:
-            validite = verifCavalier(board, move);
+            validite = verifCavalier(move);
             *piece = 3;
             break;
         case TOUR:
@@ -162,20 +162,13 @@ int verifFou(Piece **board, int **move) {
             if (board[move[0][0] + i * sign(move[0][1] - move[0][0])][move[1][0] + i * sign(move[1][1] -
                                                                                             move[1][0])].typePiece !=
                 VIDE) {
-                return 2;
+                return 5;
             }
-
-        }
-
-        if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
-            return 2;
-        } else if (board[move[0][1]][move[1][1]].couleurPiece != board[move[0][0]][move[1][0]].couleurPiece &&
-                   board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 0;
         }
     } else {
-        return 1;
+        return 4;
     }
+    return 0;
     // -> Pas de limite de déplacement mais seulement en diagonale
     // on vérifie d'abord si le coup est correct
     //      -> on compare la différence des x et des y
@@ -194,9 +187,16 @@ int verifFou(Piece **board, int **move) {
     //         (NOIR) on soustraie 1 aux coord a chaque fois
 }
 
-int verifCavalier(Piece **board, int **move) {
+int verifCavalier(int **move) {
 
-    if ((move[0][0] - move[0][1]) == 0 || (move[0][0] - move[0][1]) > 2) {
+    if (abs(move[0][1] - move[0][0]) + abs(move[1][1] - move[1][0]) == 3 &&
+        (abs(move[0][1] - move[0][0]) < 3 && abs(move[0][1] - move[0][0]) > 0)) {
+        return 0;
+    } else {
+        return 4;
+    }
+
+    /*if ((move[0][0] - move[0][1]) == 0 || (move[0][0] - move[0][1]) > 2) {
         return 3;
     } else if ((move[0][0] - move[0][1] == 2 || move[0][0] - move[0][1] == -2) &&
                (move[1][0] - move[1][1] == 1 || move[1][0] - move[1][1] == -1)) {
@@ -228,7 +228,7 @@ int verifCavalier(Piece **board, int **move) {
                    board[move[0][1]][move[1][1]].typePiece != ROI) {
             return 0;
         }
-    }
+    }*/
     // -> limite de déplacement en l
     // peut passer au dessus des autres pièces
     // -> on vérifie si la différence des x ou des y est égale à 1 ou a 2
@@ -245,7 +245,21 @@ int verifCavalier(Piece **board, int **move) {
 
 int verifTour(Piece **board, int **move) {
 
-    if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) { //SI AUCUN MOUVEMENT
+    if (abs(move[1][1] - move[1][0]) == 0 ||
+        abs(move[0][1] - move[0][0]) == 0) {
+        for (int i = 1; i < abs(move[0][1] - move[0][0]) + abs(move[1][1] - move[1][0]); i++) {
+            if (board[move[0][0] + i * sign(move[0][1] - move[0][0])][move[1][0] + i * sign(move[1][1] -
+                                                                                            move[1][0])].typePiece !=
+                VIDE) {
+                return 5;
+            }
+        }
+    } else {
+        return 4;
+    }
+    return 0;
+
+    /*if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) { //SI AUCUN MOUVEMENT
         printf("Vous n'avez effectuer aucun déplacement\n");
         return 4;
     } else if (move[0][0] - move[0][1] != 0 &&
@@ -341,7 +355,7 @@ int verifTour(Piece **board, int **move) {
                 }
             }
         }
-    }
+    }*/
 
     // -> déplacement seulement dans une direction
     // -> on soustraie les déplacement d'arrivé et de départ et on regarde si l'un des deux est égal à 0
@@ -381,8 +395,16 @@ int verifTour(Piece **board, int **move) {
 }
 
 int verifDame(Piece **board, int **move) {
+    int tour = verifTour(board, move), fou = verifFou(board, move);
+    if (!(tour || fou)) {
+        return 0;
+    } else if (tour > fou) {
+        return tour;
+    } else {
+        return fou;
+    }
 
-    if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
+    /*if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
         printf("Vous n'avez effectuer aucun déplacement\n");
         return 5;
     } else if (move[0][0] - move[0][1] != 0 && move[1][0] - move[1][1] == 0) { //DEPLACEMENT HORIZONTAL
@@ -491,7 +513,7 @@ int verifDame(Piece **board, int **move) {
                    board[move[0][1]][move[1][1]].typePiece != ROI) {
             return 0;
         }
-    }
+    }*/
 }
 
 int verifRoi(Piece **board, int **move) {

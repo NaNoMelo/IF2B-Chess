@@ -76,7 +76,7 @@ int sign(int nombre) {
     return ((nombre > 0) - (nombre < 0));
 }
 
-void err(int validite) {
+void printErr(int validite) {
     switch (validite) {
         default:
             printf("Code erreur non supporte\n");
