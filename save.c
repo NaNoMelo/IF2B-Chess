@@ -25,7 +25,7 @@ void saveGame(FILE *save, Piece **board, int taillePlateau, int tour) {
 
 void loadGame(FILE *save, Piece **board, int taillePlateau, int *tour) {
     fscanf(save, "%d", tour);
-    printf("%d\n", *tour);
+    printf("Tour : %d\n", *tour);
     for (int y = 0; y < taillePlateau; ++y) {
         for (int x = 0; x < taillePlateau; ++x) {
             fscanf(save, "%d", &board[x][y].typePiece);

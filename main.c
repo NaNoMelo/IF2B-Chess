@@ -27,7 +27,7 @@ int main() {
         case 2:
             printf("load\n");
             fscanf(save, "%d", &taillePlateau);
-            printf("%d\n", taillePlateau);
+            printf("Taille : %d\n", taillePlateau);
             if (taillePlateau > 12 || taillePlateau < 6) {
                 printf("Echec du chargement de la partie, creation d'une nouvelle partie.\n");
             } else {
