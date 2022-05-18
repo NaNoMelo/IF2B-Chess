@@ -22,3 +22,14 @@ void saveGame(FILE *save, Piece **board, int taillePlateau, int tour) {
         }
     }
 }
+
+void loadGame(FILE *save, Piece **board, int taillePlateau, int *tour) {
+    fscanf(save, "%d", tour);
+    for (int y = 0; y < taillePlateau; ++y) {
+        for (int x = 0; x < taillePlateau; ++x) {
+            fscanf(save, "%d", &board[x][y].typePiece);
+            fscanf(save, "%d", &board[x][y].couleurPiece);
+            fscanf(save, "%d", &board[x][y].nbMove);
+        }
+    }
+}

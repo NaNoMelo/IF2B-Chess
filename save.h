@@ -7,7 +7,7 @@
 
 #include "board.h"
 
-void loadGame();
+void loadGame(FILE *save, Piece **board, int taillePlateau, int *tour);
 
 void saveGame(FILE *save, Piece **board, int taillePlateau, int tour);
 

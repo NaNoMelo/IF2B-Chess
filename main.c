@@ -25,13 +25,17 @@ int main() {
     } while (menu > 3 || menu < 1);
     switch (menu) {
         case 2:
-            printf("load");
+            printf("load\n");
             fscanf(save, "%d", &taillePlateau);
-            printf("%d", taillePlateau);
+            printf("%d\n", taillePlateau);
             if (taillePlateau > 12 || taillePlateau < 6) {
                 printf("Echec du chargement de la partie, creation d'une nouvelle partie.\n");
             } else {
-                //loadGame();
+                board = (Piece **) malloc(sizeof(Piece *) * taillePlateau);
+                for (int i = 0; i < taillePlateau; i++) {
+                    board[i] = (Piece *) malloc(sizeof(Piece) * taillePlateau);
+                }
+                loadGame(save, board, taillePlateau, &tour);
                 break;
             }
 
