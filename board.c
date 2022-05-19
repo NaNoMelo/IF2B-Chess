@@ -62,8 +62,15 @@ void executeMove(Piece **board, int **move) {
     board[move[0][0]][move[1][0]] = (Piece) {VIDE, NONE, 0};
 }
 
-int verifDeplacement(Piece **board, int **move, int joueur) {
+void undoMove(Piece **board, int **move, Piece previous) {
+    board[move[0][0]][move[1][0]] = board[move[0][1]][move[1][1]];
+    board[move[0][0]][move[1][0]].nbMove--;
+    board[move[0][1]][move[1][1]] = previous;
+}
+
+int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau) {
     int validite, piece;
+    Piece previous;
     if (board[move[0][0]][move[1][0]].typePiece == VIDE) {
         validite = 1;       //mouvement case vide
     } else if (board[move[0][0]][move[1][0]].couleurPiece != joueur) {
@@ -78,10 +85,26 @@ int verifDeplacement(Piece **board, int **move, int joueur) {
             //5 si piece sur le chemin
         } else if (board[move[0][1]][move[1][1]].couleurPiece == board[move[0][0]][move[1][0]].couleurPiece) {
             validite = 6;   //mange propre piece
-        } else if (verifEchec(board, move, 12)) {
-            validite = 7;   //echec
+        } else {
+            previous = board[move[0][1]][move[1][1]];
+            executeMove(board, move);
+            if (verifEchec(board, taillePlateau) == joueur) {
+                validite = 7;   //echec
+                undoMove(board, move, previous);
+            }
         }
     }
     printErr(validite);
     return validite;
+}
+
+void chercherRois(Piece **board, int taillePlateau, int **rois) {
+    for (int y = 0; y < taillePlateau; y++) {
+        for (int x = 0; x < taillePlateau; ++x) {
+            if (board[x][y].typePiece == ROI) {
+                rois[0][board[x][y].couleurPiece - 1] = x;
+                rois[1][board[x][y].couleurPiece - 1] = y;
+            }
+        }
+    }
 }

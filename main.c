@@ -73,8 +73,7 @@ int main() {
                         exit(0);
                 }
             } while (action);
-        } while (verifDeplacement(board, move, joueur));
-        executeMove(board, move);
+        } while (verifDeplacement(board, move, joueur, taillePlateau));
 
         tour++;
 

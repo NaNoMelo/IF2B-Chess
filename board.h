@@ -26,6 +26,8 @@ void afficherPlateau(int taille, Piece **board);
 
 void executeMove(Piece **board, int **move);
 
-int verifDeplacement(Piece **board, int **move, int joueur);
+int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau);
+
+void chercherRois(Piece **board, int taillePlateau, int **rois);
 
 #endif //IF2B_CHESS_BOARD_H
