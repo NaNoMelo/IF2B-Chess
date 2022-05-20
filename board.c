@@ -12,7 +12,11 @@
 #include "saisie.h"
 #include "verif.h"
 
-
+/**
+ * Fonction générant les pièces répartis alléatoirement sur le plateau
+ * @param taille
+ * @param board
+ */
 void genererPlateau(int taille, Piece **board) {
     srand(time(NULL));
     board[rand() % taille][0] = (Piece) {ROI, NOIR, 0};
@@ -33,6 +37,11 @@ void genererPlateau(int taille, Piece **board) {
     }
 }
 
+/**
+ * Fonction affichant le plateau sur la console
+ * @param taille
+ * @param board
+ */
 void afficherPlateau(int taille, Piece **board) {
     char lettres[] = {" abcdefghijkl"};
     char pieces[] = {"-PFCTDR"};
@@ -56,18 +65,37 @@ void afficherPlateau(int taille, Piece **board) {
     }
 }
 
+/**
+ * Fonction effectuant concretement le déplacement choisi par le joueur sur le plateau
+ * @param board
+ * @param move
+ */
 void executeMove(Piece **board, int **move) {
     board[move[0][1]][move[1][1]] = board[move[0][0]][move[1][0]];
     board[move[0][1]][move[1][1]].nbMove++;
     board[move[0][0]][move[1][0]] = (Piece) {VIDE, NONE, 0};
 }
 
+/**
+ * Fonction retirant le déplacement précédent si la vérification revient fausse
+ * @param board
+ * @param move
+ * @param previous
+ */
 void undoMove(Piece **board, int **move, Piece previous) {
     board[move[0][0]][move[1][0]] = board[move[0][1]][move[1][1]];
     board[move[0][0]][move[1][0]].nbMove--;
     board[move[0][1]][move[1][1]] = previous;
 }
 
+/**
+ * Fonction globale de vérifications des déplacement qui vérifie chaque cas possible
+ * @param board
+ * @param move
+ * @param joueur
+ * @param taillePlateau
+ * @return "validité" qui permettra d'afficher les messages d'erreur correspondants si il y a une erreur dans la déplacement
+ */
 int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau) {
     int validite, piece;
     Piece previous;
@@ -98,6 +126,12 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau) {
     return validite;
 }
 
+/**
+ * Fonction permettant de localiser un roi sur le plateau
+ * @param board
+ * @param taillePlateau
+ * @param rois
+ */
 void chercherRois(Piece **board, int taillePlateau, int **rois) {
     for (int y = 0; y < taillePlateau; y++) {
         for (int x = 0; x < taillePlateau; ++x) {

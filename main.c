@@ -23,6 +23,7 @@ int main() {
     do {
         menu = askMenu();
     } while (menu > 3 || menu < 1);
+
     switch (menu) {
         case 2:
             printf("load\n");

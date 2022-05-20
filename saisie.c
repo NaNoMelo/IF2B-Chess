@@ -13,6 +13,10 @@
 #include "verif.h"
 #include "board.h"
 
+/**
+ * Fonction demandant au joueur quuel options du menu il souhaite selectionner
+ * @return 1 si il souhaite commencer une nouvelle partie, 2 si il souhaite reprendre la dernière partie sauvegarder, 3 si il souhaite quitter le programme
+ */
 int askMenu() {
     int m;
     do {
@@ -22,6 +26,10 @@ int askMenu() {
     return m;
 }
 
+/**
+ * Fonction demandant au joueur la taille de plateau qu'il souhaite entre 6 et 12
+ * @return t qui correspond à la taille du plateau
+ */
 int askTaillePlateau() {
     int t;
     do {
@@ -31,6 +39,13 @@ int askTaillePlateau() {
     return t;
 }
 
+/**
+ * Fonction qui demande au joueur le mouvement qu'il souhaite éffectuer et qui le stock dans une matrice
+ * @param taillePlateau
+ * @param joueur
+ * @param move
+ * @return 0 si le joueur à rentrer un déplacement sous la bonne forme, break sinon avec message d'erreur
+ */
 int askDeplacement(int taillePlateau, int joueur, int **move) {
     int state;
     char unparsedMove[10];
@@ -41,7 +56,7 @@ int askDeplacement(int taillePlateau, int joueur, int **move) {
         move[0][1] = -1;
         move[1][0] = -1;
         move[1][1] = -1;
-        printf("Deplacement du joueur %d:\n", joueur);
+        printf("Deplacement du joueur %d (X depart Y depart X arrivé Y arrivé):\n", joueur);
         fflush(stdin);
         scanf("%s", &unparsedMove);
         strupr(unparsedMove);
@@ -73,10 +88,19 @@ int askDeplacement(int taillePlateau, int joueur, int **move) {
     return 0;
 }
 
+/**
+ * Fonction servant à sauvegarder le signe d'une soustraction
+ * @param nombre
+ * @return 1 si la soustraction est positive et -1 si elle est négative
+ */
 int sign(int nombre) {
     return ((nombre > 0) - (nombre < 0));
 }
 
+/**
+ * Fonction affichant sur la console les erreurs dans le mouvement que propose le joueur joueur
+ * @param validite (contenant les chiffres renvoyés par les fonctions de verification des pièces)
+ */
 void printErr(int validite) {
     switch (validite) {
         default:
