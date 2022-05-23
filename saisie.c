@@ -56,7 +56,7 @@ int askDeplacement(int taillePlateau, int joueur, int **move) {
         move[0][1] = -1;
         move[1][0] = -1;
         move[1][1] = -1;
-        printf("Deplacement du joueur %d (X depart Y depart X arrivé Y arrivé):\n", joueur);
+        printf("Deplacement du joueur %d (X depart Y depart X arrivee Y arrivee):\n", joueur);
         fflush(stdin);
         scanf("%s", &unparsedMove);
         strupr(unparsedMove);
@@ -89,9 +89,9 @@ int askDeplacement(int taillePlateau, int joueur, int **move) {
 }
 
 /**
- * Fonction servant à sauvegarder le signe d'une soustraction
+ * Fonction servant à sauvegarder le signe d'un nombre
  * @param nombre
- * @return 1 si la soustraction est positive et -1 si elle est négative
+ * @return 1 si le nombre est positif et -1 si il est négatif
  */
 int sign(int nombre) {
     return ((nombre > 0) - (nombre < 0));

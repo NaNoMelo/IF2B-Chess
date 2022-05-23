@@ -26,7 +26,7 @@ void afficherPlateau(int taille, Piece **board);
 
 void executeMove(Piece **board, int **move);
 
-int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau);
+void undoMove(Piece **board, int **move, Piece previous);
 
 void chercherRois(Piece **board, int taillePlateau, int **rois);
 

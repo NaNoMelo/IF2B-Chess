@@ -1,0 +1,170 @@
+\hypertarget{board_8h}{}\doxysection{C\+:/\+Users/natha/\+One\+Drive -\/ Universite De Technologie De Belfort-\/\+Montbeliard/\+Documents/\+Cours/\+UTBM/\+TC02/\+IF2/\+C\+\_\+\+Scripts/\+IF2\+B-\/\+Chess/board.h File Reference}
+\label{board_8h}\index{C:/Users/natha/OneDrive -\/ Universite De Technologie De Belfort-\/Montbeliard/Documents/Cours/UTBM/TC02/IF2/C\_Scripts/IF2B-\/Chess/board.h@{C:/Users/natha/OneDrive -\/ Universite De Technologie De Belfort-\/Montbeliard/Documents/Cours/UTBM/TC02/IF2/C\_Scripts/IF2B-\/Chess/board.h}}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_piece}{Piece}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83}{Type\+Piece}} \{ \newline
+\mbox{\hyperlink{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83ad4686f4f969d0e851d9170c09a89a837}{VIDE}}
+, \mbox{\hyperlink{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a6af14267cd0d73d4f06c05fc42227384}{PION}}
+, \mbox{\hyperlink{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a314a9dd3506d55220dd300da58cbde2a}{FOU}}
+, \mbox{\hyperlink{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83ab9999d23614d6d87fed831abb2a65b90}{CAVALIER}}
+, \newline
+\mbox{\hyperlink{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83aa2dfed527224adf69187f8c8d75e7dcd}{TOUR}}
+, \mbox{\hyperlink{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a436250abd7e6692a3ab0983590128093}{DAME}}
+, \mbox{\hyperlink{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a630b67ff829a4c185e65091797e9a03c}{ROI}}
+ \}
+\item 
+enum \mbox{\hyperlink{board_8h_a61fc1f9abcf466b657d085e620b44f76}{Couleur\+Piece}} \{ \mbox{\hyperlink{board_8h_a61fc1f9abcf466b657d085e620b44f76ac157bdf0b85a40d2619cbc8bc1ae5fe2}{NONE}}
+, \mbox{\hyperlink{board_8h_a61fc1f9abcf466b657d085e620b44f76a35653913ced93d8199f0378ec538a0c7}{BLANC}}
+, \mbox{\hyperlink{board_8h_a61fc1f9abcf466b657d085e620b44f76a59e3323a198f0162330111165caaf367}{NOIR}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{board_8h_a25139ad10b1ca5c0042c63c5aa5dd494}{generer\+Plateau}} (int taille, \mbox{\hyperlink{struct_piece}{Piece}} $\ast$$\ast$board)
+\item 
+void \mbox{\hyperlink{board_8h_a8cd72528a8ed64e9899e0d99695437a7}{afficher\+Plateau}} (int taille, \mbox{\hyperlink{struct_piece}{Piece}} $\ast$$\ast$board)
+\item 
+void \mbox{\hyperlink{board_8h_a08402b2cdbee95b7e7496f5a2ef2ef22}{execute\+Move}} (\mbox{\hyperlink{struct_piece}{Piece}} $\ast$$\ast$board, int $\ast$$\ast$move)
+\item 
+void \mbox{\hyperlink{board_8h_a0ed4c400ef61fb62c2b9da8cbbc6d52c}{undo\+Move}} (\mbox{\hyperlink{struct_piece}{Piece}} $\ast$$\ast$board, int $\ast$$\ast$move, \mbox{\hyperlink{struct_piece}{Piece}} previous)
+\item 
+void \mbox{\hyperlink{board_8h_a1124ad1f5ec2220161c89954382ff062}{chercher\+Rois}} (\mbox{\hyperlink{struct_piece}{Piece}} $\ast$$\ast$board, int taille\+Plateau, int $\ast$$\ast$rois)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{board_8h_a61fc1f9abcf466b657d085e620b44f76}\label{board_8h_a61fc1f9abcf466b657d085e620b44f76}} 
+\index{board.h@{board.h}!CouleurPiece@{CouleurPiece}}
+\index{CouleurPiece@{CouleurPiece}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{CouleurPiece}{CouleurPiece}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{board_8h_a61fc1f9abcf466b657d085e620b44f76}{Couleur\+Piece}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NONE@{NONE}!board.h@{board.h}}\index{board.h@{board.h}!NONE@{NONE}}}\mbox{\Hypertarget{board_8h_a61fc1f9abcf466b657d085e620b44f76ac157bdf0b85a40d2619cbc8bc1ae5fe2}\label{board_8h_a61fc1f9abcf466b657d085e620b44f76ac157bdf0b85a40d2619cbc8bc1ae5fe2}} 
+NONE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BLANC@{BLANC}!board.h@{board.h}}\index{board.h@{board.h}!BLANC@{BLANC}}}\mbox{\Hypertarget{board_8h_a61fc1f9abcf466b657d085e620b44f76a35653913ced93d8199f0378ec538a0c7}\label{board_8h_a61fc1f9abcf466b657d085e620b44f76a35653913ced93d8199f0378ec538a0c7}} 
+BLANC&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NOIR@{NOIR}!board.h@{board.h}}\index{board.h@{board.h}!NOIR@{NOIR}}}\mbox{\Hypertarget{board_8h_a61fc1f9abcf466b657d085e620b44f76a59e3323a198f0162330111165caaf367}\label{board_8h_a61fc1f9abcf466b657d085e620b44f76a59e3323a198f0162330111165caaf367}} 
+NOIR&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83}\label{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83}} 
+\index{board.h@{board.h}!TypePiece@{TypePiece}}
+\index{TypePiece@{TypePiece}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{TypePiece}{TypePiece}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83}{Type\+Piece}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VIDE@{VIDE}!board.h@{board.h}}\index{board.h@{board.h}!VIDE@{VIDE}}}\mbox{\Hypertarget{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83ad4686f4f969d0e851d9170c09a89a837}\label{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83ad4686f4f969d0e851d9170c09a89a837}} 
+VIDE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PION@{PION}!board.h@{board.h}}\index{board.h@{board.h}!PION@{PION}}}\mbox{\Hypertarget{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a6af14267cd0d73d4f06c05fc42227384}\label{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a6af14267cd0d73d4f06c05fc42227384}} 
+PION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FOU@{FOU}!board.h@{board.h}}\index{board.h@{board.h}!FOU@{FOU}}}\mbox{\Hypertarget{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a314a9dd3506d55220dd300da58cbde2a}\label{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a314a9dd3506d55220dd300da58cbde2a}} 
+FOU&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CAVALIER@{CAVALIER}!board.h@{board.h}}\index{board.h@{board.h}!CAVALIER@{CAVALIER}}}\mbox{\Hypertarget{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83ab9999d23614d6d87fed831abb2a65b90}\label{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83ab9999d23614d6d87fed831abb2a65b90}} 
+CAVALIER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TOUR@{TOUR}!board.h@{board.h}}\index{board.h@{board.h}!TOUR@{TOUR}}}\mbox{\Hypertarget{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83aa2dfed527224adf69187f8c8d75e7dcd}\label{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83aa2dfed527224adf69187f8c8d75e7dcd}} 
+TOUR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DAME@{DAME}!board.h@{board.h}}\index{board.h@{board.h}!DAME@{DAME}}}\mbox{\Hypertarget{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a436250abd7e6692a3ab0983590128093}\label{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a436250abd7e6692a3ab0983590128093}} 
+DAME&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ROI@{ROI}!board.h@{board.h}}\index{board.h@{board.h}!ROI@{ROI}}}\mbox{\Hypertarget{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a630b67ff829a4c185e65091797e9a03c}\label{board_8h_a2437c4d8f0bf23b8c6c76305ed35ae83a630b67ff829a4c185e65091797e9a03c}} 
+ROI&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{board_8h_a8cd72528a8ed64e9899e0d99695437a7}\label{board_8h_a8cd72528a8ed64e9899e0d99695437a7}} 
+\index{board.h@{board.h}!afficherPlateau@{afficherPlateau}}
+\index{afficherPlateau@{afficherPlateau}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{afficherPlateau()}{afficherPlateau()}}
+{\footnotesize\ttfamily void afficher\+Plateau (\begin{DoxyParamCaption}\item[{int}]{taille,  }\item[{\mbox{\hyperlink{struct_piece}{Piece}} $\ast$$\ast$}]{board }\end{DoxyParamCaption})}
+
+Fonction affichant le plateau sur la console 
+\begin{DoxyParams}{Parameters}
+{\em taille} & \\
+\hline
+{\em board} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{board_8h_a1124ad1f5ec2220161c89954382ff062}\label{board_8h_a1124ad1f5ec2220161c89954382ff062}} 
+\index{board.h@{board.h}!chercherRois@{chercherRois}}
+\index{chercherRois@{chercherRois}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{chercherRois()}{chercherRois()}}
+{\footnotesize\ttfamily void chercher\+Rois (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_piece}{Piece}} $\ast$$\ast$}]{board,  }\item[{int}]{taille\+Plateau,  }\item[{int $\ast$$\ast$}]{rois }\end{DoxyParamCaption})}
+
+Fonction permettant de localiser un roi sur le plateau 
+\begin{DoxyParams}{Parameters}
+{\em board} & \\
+\hline
+{\em taille\+Plateau} & \\
+\hline
+{\em rois} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{board_8h_a08402b2cdbee95b7e7496f5a2ef2ef22}\label{board_8h_a08402b2cdbee95b7e7496f5a2ef2ef22}} 
+\index{board.h@{board.h}!executeMove@{executeMove}}
+\index{executeMove@{executeMove}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{executeMove()}{executeMove()}}
+{\footnotesize\ttfamily void execute\+Move (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_piece}{Piece}} $\ast$$\ast$}]{board,  }\item[{int $\ast$$\ast$}]{move }\end{DoxyParamCaption})}
+
+Fonction effectuant concretement le déplacement choisi par le joueur sur le plateau 
+\begin{DoxyParams}{Parameters}
+{\em board} & \\
+\hline
+{\em move} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{board_8h_a25139ad10b1ca5c0042c63c5aa5dd494}\label{board_8h_a25139ad10b1ca5c0042c63c5aa5dd494}} 
+\index{board.h@{board.h}!genererPlateau@{genererPlateau}}
+\index{genererPlateau@{genererPlateau}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{genererPlateau()}{genererPlateau()}}
+{\footnotesize\ttfamily void generer\+Plateau (\begin{DoxyParamCaption}\item[{int}]{taille,  }\item[{\mbox{\hyperlink{struct_piece}{Piece}} $\ast$$\ast$}]{board }\end{DoxyParamCaption})}
+
+Fonction générant les pièces répartis alléatoirement sur le plateau 
+\begin{DoxyParams}{Parameters}
+{\em taille} & \\
+\hline
+{\em board} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{board_8h_a0ed4c400ef61fb62c2b9da8cbbc6d52c}\label{board_8h_a0ed4c400ef61fb62c2b9da8cbbc6d52c}} 
+\index{board.h@{board.h}!undoMove@{undoMove}}
+\index{undoMove@{undoMove}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{undoMove()}{undoMove()}}
+{\footnotesize\ttfamily void undo\+Move (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_piece}{Piece}} $\ast$$\ast$}]{board,  }\item[{int $\ast$$\ast$}]{move,  }\item[{\mbox{\hyperlink{struct_piece}{Piece}}}]{previous }\end{DoxyParamCaption})}
+
+Fonction retirant le déplacement précédent si la vérification revient fausse 
+\begin{DoxyParams}{Parameters}
+{\em board} & \\
+\hline
+{\em move} & \\
+\hline
+{\em previous} & \\
+\hline
+\end{DoxyParams}

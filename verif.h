@@ -7,6 +7,8 @@
 
 #include "board.h"
 
+int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau);
+
 int verifMouvement(Piece **board, int **move, int *piece);
 
 int verifPion(Piece **board, int **move);
