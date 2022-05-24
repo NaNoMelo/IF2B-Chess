@@ -9,9 +9,9 @@
 
 int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau);
 
-int verifMouvement(Piece **board, int **move, int *piece);
+int verifMouvement(Piece **board, int **move, int *piece,int joueur);
 
-int verifPion(Piece **board, int **move);
+int verifPion(Piece **board, int **move,int joueur);
 
 int verifFou(Piece **board, int **move);
 

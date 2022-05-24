@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/xhtml;charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="IE=11" http-equiv="X-UA-Compatible"/>
+    <meta content="Doxygen 1.9.4" name="generator"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>IF2B - Really Bad Chess - Yann Thomas, Nathan Lamey: Référence du fichier C:/Users/natha/OneDrive -
+        Universite De Technologie De
+        Belfort-Montbeliard/Documents/Cours/UTBM/TC02/IF2/C_Scripts/IF2B-Chess/save.c</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css"/>
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="dynsections.js" type="text/javascript"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+    <script src="search/searchdata.js" type="text/javascript"></script>
+    <script src="search/search.js" type="text/javascript"></script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+    <div id="titlearea">
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+            <tr id="projectrow">
+                <td id="projectalign">
+                    <div id="projectname">IF2B - Really Bad Chess - Yann Thomas, Nathan Lamey
+                    </div>
+                    <div id="projectbrief">Jeu d&#39;échecs aléatoires réalisé dans le cadre du projet à effectuer pour
+                        l&#39;UV IF2B
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- end header part -->
+    <!-- Généré par Doxygen 1.9.4 -->
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        var searchBox = new SearchBox("searchBox", "search", 'Recherche', '.html');
+        /* @license-end */
+    </script>
+    <script src="menudata.js" type="text/javascript"></script>
+    <script src="menu.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        $(function () {
+            initMenu('', true, false, 'search.php', 'Recherche');
+            $(document).ready(function () {
+                init_search();
+            });
+        });
+        /* @license-end */
+    </script>
+    <div id="main-nav"></div>
+    <!-- window showing the filter options -->
+    <div id="MSearchSelectWindow"
+         onkeydown="return searchBox.OnSearchSelectKey(event)"
+         onmouseout="return searchBox.OnSearchSelectHide()"
+         onmouseover="return searchBox.OnSearchSelectShow()">
+    </div>
+
+    <!-- iframe showing the search results (closed by default) -->
+    <div id="MSearchResultsWindow">
+        <iframe frameborder="0" id="MSearchResults"
+                name="MSearchResults" src="javascript:void(0)">
+        </iframe>
+    </div>
+
+</div><!-- top -->
+<div class="header">
+    <div class="summary">
+        <a href="#func-members">Fonctions</a></div>
+    <div class="headertitle">
+        <div class="title">Référence du fichier C:/Users/natha/OneDrive - Universite De Technologie De
+            Belfort-Montbeliard/Documents/Cours/UTBM/TC02/IF2/C_Scripts/IF2B-Chess/save.c
+        </div>
+    </div>
+</div><!--header-->
+<div class="contents">
+    <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br/>
+        <code>#include &lt;stdlib.h&gt;</code><br/>
+        <code>#include &lt;stdbool.h&gt;</code><br/>
+        <code>#include &lt;string.h&gt;</code><br/>
+        <code>#include &lt;time.h&gt;</code><br/>
+        <code>#include &lt;math.h&gt;</code><br/>
+        <code>#include &quot;<a class="el" href="saisie_8h_source.html">saisie.h</a>&quot;</code><br/>
+        <code>#include &quot;<a class="el" href="board_8h_source.html">board.h</a>&quot;</code><br/>
+        <code>#include &quot;<a class="el" href="verif_8h_source.html">verif.h</a>&quot;</code><br/>
+        <code>#include &quot;<a class="el" href="save_8h_source.html">save.h</a>&quot;</code><br/>
+    </div>
+    <table class="memberdecls">
+        <tr class="heading">
+            <td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+                Fonctions</h2></td>
+        </tr>
+        <tr class="memitem:ac93740281399b772a65b8abcd352c2fd">
+            <td align="right" class="memItemLeft" valign="top">void&#160;</td>
+            <td class="memItemRight" valign="bottom"><a class="el"
+                                                        href="save_8c.html#ac93740281399b772a65b8abcd352c2fd">saveGame</a>
+                (FILE *save, <a class="el" href="struct_piece.html">Piece</a> **board, int taillePlateau, int tour)
+            </td>
+        </tr>
+        <tr class="separator:ac93740281399b772a65b8abcd352c2fd">
+            <td class="memSeparator" colspan="2">&#160;</td>
+        </tr>
+        <tr class="memitem:a89fba4b2bcff43d4e3d7cb7e7815b312">
+            <td align="right" class="memItemLeft" valign="top">void&#160;</td>
+            <td class="memItemRight" valign="bottom"><a class="el"
+                                                        href="save_8c.html#a89fba4b2bcff43d4e3d7cb7e7815b312">loadGame</a>
+                (FILE *save, <a class="el" href="struct_piece.html">Piece</a> **board, int taillePlateau, int *tour)
+            </td>
+        </tr>
+        <tr class="separator:a89fba4b2bcff43d4e3d7cb7e7815b312">
+            <td class="memSeparator" colspan="2">&#160;</td>
+        </tr>
+    </table>
+    <h2 class="groupheader">Documentation des fonctions</h2>
+    <a id="a89fba4b2bcff43d4e3d7cb7e7815b312" name="a89fba4b2bcff43d4e3d7cb7e7815b312"></a>
+    <h2 class="memtitle"><span class="permalink"><a href="#a89fba4b2bcff43d4e3d7cb7e7815b312">&#9670;&nbsp;</a></span>loadGame()
+    </h2>
+
+    <div class="memitem">
+        <div class="memproto">
+            <table class="memname">
+                <tr>
+                    <td class="memname">void loadGame</td>
+                    <td>(</td>
+                    <td class="paramtype">FILE *&#160;</td>
+                    <td class="paramname"><em>save</em>,</td>
+                </tr>
+                <tr>
+                    <td class="paramkey"></td>
+                    <td></td>
+                    <td class="paramtype"><a class="el" href="struct_piece.html">Piece</a> **&#160;</td>
+                    <td class="paramname"><em>board</em>,</td>
+                </tr>
+                <tr>
+                    <td class="paramkey"></td>
+                    <td></td>
+                    <td class="paramtype">int&#160;</td>
+                    <td class="paramname"><em>taillePlateau</em>,</td>
+                </tr>
+                <tr>
+                    <td class="paramkey"></td>
+                    <td></td>
+                    <td class="paramtype">int *&#160;</td>
+                    <td class="paramname"><em>tour</em>&#160;</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="memdoc">
+
+        </div>
+    </div>
+    <a id="ac93740281399b772a65b8abcd352c2fd" name="ac93740281399b772a65b8abcd352c2fd"></a>
+    <h2 class="memtitle"><span class="permalink"><a href="#ac93740281399b772a65b8abcd352c2fd">&#9670;&nbsp;</a></span>saveGame()
+    </h2>
+
+    <div class="memitem">
+        <div class="memproto">
+            <table class="memname">
+                <tr>
+                    <td class="memname">void saveGame</td>
+                    <td>(</td>
+                    <td class="paramtype">FILE *&#160;</td>
+                    <td class="paramname"><em>save</em>,</td>
+                </tr>
+                <tr>
+                    <td class="paramkey"></td>
+                    <td></td>
+                    <td class="paramtype"><a class="el" href="struct_piece.html">Piece</a> **&#160;</td>
+                    <td class="paramname"><em>board</em>,</td>
+                </tr>
+                <tr>
+                    <td class="paramkey"></td>
+                    <td></td>
+                    <td class="paramtype">int&#160;</td>
+                    <td class="paramname"><em>taillePlateau</em>,</td>
+                </tr>
+                <tr>
+                    <td class="paramkey"></td>
+                    <td></td>
+                    <td class="paramtype">int&#160;</td>
+                    <td class="paramname"><em>tour</em>&#160;</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>)</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="memdoc">
+
+        </div>
+    </div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/>
+<address class="footer"><small>
+    Généré par&#160;<a href="https://www.doxygen.org/index.html"><img alt="doxygen" class="footer" height="31"
+                                                                      src="doxygen.svg" width="104"/></a> 1.9.4
+</small></address>
+</body>
+</html>

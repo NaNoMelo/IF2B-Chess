@@ -98,7 +98,7 @@ int sign(int nombre) {
 }
 
 /**
- * Fonction affichant sur la console les erreurs dans le mouvement que propose le joueur joueur
+ * Fonction affichant sur la console les erreurs dans le mouvement que propose le joueur
  * @param validite (contenant les chiffres renvoyés par les fonctions de verification des pièces)
  */
 void printErr(int validite) {

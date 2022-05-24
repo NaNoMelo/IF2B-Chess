@@ -31,7 +31,7 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau) {
     } else if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
         validite = 3;       //pas de déplacement
     } else {
-        validite = verifMouvement(board, move, &piece);
+        validite = verifMouvement(board, move, &piece, joueur);
         printf("Piece : %d\n", piece);
         if (validite) {
             //4 si move illegal
@@ -56,9 +56,10 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau) {
  * @param board
  * @param move
  * @param piece
+ * @param joueur
  * @return "validité" qui contient le code retourné par chaque vérification
  */
-int verifMouvement(Piece **board, int **move, int *piece) {
+int verifMouvement(Piece **board, int **move, int *piece, int joueur) {
     int validite;
     switch (board[move[0][0]][move[1][0]].typePiece) {
         case VIDE:
@@ -66,7 +67,7 @@ int verifMouvement(Piece **board, int **move, int *piece) {
             *piece = 0;
             break;
         case PION:
-            validite = verifPion(board, move);
+            validite = verifPion(board, move, joueur);
             *piece = 1;
             break;
         case FOU:
@@ -97,11 +98,38 @@ int verifMouvement(Piece **board, int **move, int *piece) {
  * Fonction vérifiant si le mouvement d'un pion est possible
  * @param board
  * @param move
+ * @param joueur
  * @return
  */
-int verifPion(Piece **board, int **move) {
+int verifPion(Piece **board, int **move, int joueur) {
 
-    if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
+    joueur *= 2; //2 pour joueur 1, 4 pour joueur 2
+    joueur -= 3; //-1 pour joueur 1, 1 pour joueur 2
+
+    if (sign(move[1][1] - move[1][0]) == joueur) {
+        if (move[0][1] - move[0][0] == 0) {
+            if (board[move[0][0]][move[1][0]].nbMove > 0) {
+                if (abs(move[1][1] - move[1][0]) > 1) {
+                    return 4;
+                } else if (board[move[0][1]][move[1][1]].typePiece != VIDE) {
+                    return 5;
+                } else return 0;
+            } else {
+                if (abs(move[1][1] - move[1][0]) > 2) {
+                    return 4;
+                } else if (board[move[0][1]][move[1][1] - joueur].typePiece != VIDE ||
+                           board[move[0][1]][move[1][1]].typePiece != VIDE) {
+                    return 5;
+                } else return 0;
+            }
+        } else if (abs(move[1][1] - move[1][0]) > 1 || abs(move[0][1] - move[0][0]) > 1) {
+            return 4;
+        } else return 0;
+    } else return 4;
+
+
+
+    /*if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
         printf("Vous n'avez effectuer aucun déplacement\n");
         return 1;
     } else if ((board[move[0][0]][move[1][0]].nbMove == 0) && (move[0][0] - move[0][1] == 0) &&
@@ -188,14 +216,14 @@ int verifPion(Piece **board, int **move) {
             printf("Vous ne pouvez pas manger un roi\n");
             return 1;
         }
-    }
+    }*/
 }
 
 /**
  * Fonction vérifiant si le mouvement d'un fou est possible
  * @param board
  * @param move
- * @return4 si le mouvement n'est pas possible, 5 si une pièce est sur la trajectoire de la pièce ou 0 si le mouvement est valide
+ * @return 4 si le mouvement n'est pas possible, 5 si une pièce est sur la trajectoire de la pièce ou 0 si le mouvement est valide
  */
 int verifFou(Piece **board, int **move) {
 
@@ -300,15 +328,15 @@ int verifEchec(Piece **board, int taillePlateau) {
     while (r < 2 && !echec) {
         while (y < taillePlateau && !echec) {
             while (x < taillePlateau && !echec) {
-                tempMove[0][0] = rois[r][0];
-                tempMove[0][1] = x;
-                tempMove[1][0] = rois[r][1];
-                tempMove[1][1] = y;
-                /*if (verifPion(board, tempMove)) {
+                tempMove[0][0] = x;
+                tempMove[0][1] = rois[r][0];
+                tempMove[1][0] = y;
+                tempMove[1][1] = rois[r][1];
+                if (!verifPion(board, tempMove, -1*(r-2))) {
                     if (board[x][y].typePiece == PION && board[x][y].couleurPiece != r + 1) {
-                        echec = true;
+                        echec = r + 1;
                     }
-                }*/
+                }
                 if (!verifFou(board, tempMove)) {
                     if (board[x][y].typePiece == FOU && board[x][y].couleurPiece != r + 1) {
                         echec = r + 1;
