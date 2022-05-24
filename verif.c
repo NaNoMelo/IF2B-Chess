@@ -21,7 +21,7 @@
  * @param taillePlateau
  * @return "validité" qui permettra d'afficher les messages d'erreur correspondants si il y a une erreur dans la déplacement
  */
-int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau) {
+int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, int *echec) {
     int validite, piece;
     Piece previous;
     if (board[move[0][0]][move[1][0]].typePiece == VIDE) {
@@ -41,7 +41,8 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau) {
         } else {
             previous = board[move[0][1]][move[1][1]];
             executeMove(board, move);
-            if (verifEchec(board, taillePlateau) == joueur) {
+            *echec = verifEchec(board, taillePlateau);
+            if (echec == joueur) {
                 validite = 7;   //echec
                 undoMove(board, move, previous);
             }
