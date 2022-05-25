@@ -62,6 +62,7 @@ int askDeplacement(int taillePlateau, int joueur, int **move) {
         strupr(unparsedMove);
         if (strcmp(unparsedMove, "S\0") == 0) return 1;
         if (strcmp(unparsedMove, "X\0") == 0) return 2;
+        if (strcmp(unparsedMove, "L\0") == 0) return 3;
         for (int i = 0; i < strlen(unparsedMove); ++i) {
             while (unparsedMove[i] == ' ') { i++; }
             if (state % 2) {

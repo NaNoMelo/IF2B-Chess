@@ -87,6 +87,8 @@ int main() {
                         case 2:
                             printf("Abandon du joueur %d !\n", joueur);
                             break;
+                        case 3:
+                            exit(0);
                     }
                     if (action == 2) break;
                 } while (action);

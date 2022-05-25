@@ -22,7 +22,7 @@
  * @return "validité" qui permettra d'afficher les messages d'erreur correspondants si il y a une erreur dans la déplacement
  */
 int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, int *echec) {
-    int validite, piece;
+    int validite;
     Piece previous;
     if (board[move[0][0]][move[1][0]].typePiece == VIDE) {
         validite = 1;       //mouvement case vide
@@ -31,8 +31,7 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, i
     } else if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
         validite = 3;       //pas de déplacement
     } else {
-        validite = verifMouvement(board, move, &piece, joueur);
-        printf("Piece : %d\n", piece);
+        validite = verifMouvement(board, move, joueur);
         if (validite) {
             //4 si move illegal
             //5 si piece sur le chemin
@@ -42,9 +41,11 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, i
             previous = board[move[0][1]][move[1][1]];
             executeMove(board, move);
             *echec = verifEchec(board, taillePlateau);
-            if (echec == joueur) {
+            if (*echec == joueur) {
                 validite = 7;   //echec
                 undoMove(board, move, previous);
+            } else if (*echec != 0) {
+                if (verifMat(board, taillePlateau, -1 * (joueur - 3)))*echec = 3;
             }
         }
     }
@@ -60,36 +61,29 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, i
  * @param joueur
  * @return "validité" qui contient le code retourné par chaque vérification
  */
-int verifMouvement(Piece **board, int **move, int *piece, int joueur) {
+int verifMouvement(Piece **board, int **move, int joueur) {
     int validite;
     switch (board[move[0][0]][move[1][0]].typePiece) {
         case VIDE:
             validite = 1;
-            *piece = 0;
             break;
         case PION:
             validite = verifPion(board, move, joueur);
-            *piece = 1;
             break;
         case FOU:
             validite = verifFou(board, move);
-            *piece = 2;
             break;
         case CAVALIER:
             validite = verifCavalier(move);
-            *piece = 3;
             break;
         case TOUR:
             validite = verifTour(board, move);
-            *piece = 4;
             break;
         case DAME:
             validite = verifDame(board, move);
-            *piece = 5;
             break;
         case ROI:
             validite = verifRoi(move);
-            *piece = 6;
             break;
     }
     return validite;
@@ -127,97 +121,6 @@ int verifPion(Piece **board, int **move, int joueur) {
             return 4;
         } else return 0;
     } else return 4;
-
-
-
-    /*if ((move[0][0] == move[0][1]) && (move[1][0] == move[1][1])) {
-        printf("Vous n'avez effectuer aucun déplacement\n");
-        return 1;
-    } else if ((board[move[0][0]][move[1][0]].nbMove == 0) && (move[0][0] - move[0][1] == 0) &&
-               (move[1][0] - move[1][1] == 2)) { //BLANC DONC VERS LE HAUT
-        if (board[move[0][0]][move[1][0] - 1].typePiece == VIDE && board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 0;
-        } else if (board[move[0][0]][move[1][0] - 1].typePiece != VIDE ||
-                   board[move[0][1]][move[1][1]].typePiece != VIDE) {
-            return 1;
-        }
-    } else if ((board[move[0][0]][move[1][0]].nbMove == 0) && (move[0][0] - move[0][1] == 0) &&
-               (move[1][0] - move[1][1] == -2)) { //NOIR DONC VERS LE BAS
-        if (board[move[0][0]][move[1][0] + 1].typePiece == VIDE && board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 0;
-        } else if (board[move[0][0]][move[1][0] + 1].typePiece != VIDE ||
-                   board[move[0][1]][move[1][1]].typePiece != VIDE) {
-            return 1;
-        }
-    } else if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] == 1) { //BLANC TOUT DROIT DE 1
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 0;
-        } else if (board[move[0][1]][move[1][1]].typePiece != VIDE) {
-            return 1;
-        }
-    } else if (move[0][0] - move[0][1] == 0 && move[1][0] - move[1][1] == -1) { //NOIR TOUT DROIT DE 1
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 0;
-        } else if (board[move[0][1]][move[1][1]].typePiece != VIDE) {
-            return 1;
-        }
-    } else if (move[0][0] - move[0][1] == 1 && move[1][0] - move[1][1] == 1) { //BLANC DIAGONALE DROITE
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 0;
-        } else if (board[move[0][1]][move[1][1]].typePiece == board[move[0][0]][move[1][0]].typePiece) {
-            printf("Vous n'avez pas le droit de manger une de vos pièces\n");
-            return 1;
-        } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
-                   board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 0;
-        } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
-                   board[move[0][1]][move[1][1]].typePiece == ROI) {
-            printf("Vous ne pouvez pas manger un roi\n");
-            return 1;
-        }
-    } else if (move[0][0] - move[0][1] == -1 && move[1][0] - move[1][1] == 1) { //BLANC DIAGONALE GAUCHE
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 0;
-        } else if (board[move[0][1]][move[1][1]].typePiece == board[move[0][0]][move[1][0]].typePiece) {
-            printf("Vous n'avez pas le droit de manger une de vos pièces\n");
-            return 1;
-        } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
-                   board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 0;
-        } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
-                   board[move[0][1]][move[1][1]].typePiece == ROI) {
-            printf("Vous ne pouvez pas manger un roi\n");
-            return 1;
-        }
-    } else if (move[0][0] - move[0][1] == 1 && move[1][0] - move[1][1] == -1) { //NOIR DIAGONALE DOITE (DE A VERS Z)
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 0;
-        } else if (board[move[0][1]][move[1][1]].typePiece == board[move[0][0]][move[1][0]].typePiece) {
-            printf("Vous n'avez pas le droit de manger une de vos pièces\n");
-            return 1;
-        } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
-                   board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 0;
-        } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
-                   board[move[0][1]][move[1][1]].typePiece == ROI) {
-            printf("Vous ne pouvez pas manger un roi\n");
-            return 1;
-        }
-    } else if (move[0][0] - move[0][1] == -1 && move[1][0] - move[1][1] == -1) { //NOIR DIAGONALE GAUCHE (DE Z VERS A)
-        if (board[move[0][1]][move[1][1]].typePiece == VIDE) {
-            return 0;
-        } else if (board[move[0][1]][move[1][1]].typePiece == board[move[0][0]][move[1][0]].typePiece) {
-            printf("Vous n'avez pas le droit de manger une de vos pièces\n");
-            return 1;
-        } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
-                   board[move[0][1]][move[1][1]].typePiece != ROI) {
-            return 0;
-        } else if (board[move[0][1]][move[1][1]].typePiece != board[move[0][0]][move[1][0]].typePiece &&
-                   board[move[0][1]][move[1][1]].typePiece == ROI) {
-            printf("Vous ne pouvez pas manger un roi\n");
-            return 1;
-        }
-    }*/
 }
 
 /**
@@ -333,9 +236,10 @@ int verifEchec(Piece **board, int taillePlateau) {
                 tempMove[0][1] = rois[r][0];
                 tempMove[1][0] = y;
                 tempMove[1][1] = rois[r][1];
-                if (!verifPion(board, tempMove, -1*(r-2))) {
+                if (!verifPion(board, tempMove, -1 * (r - 2))) {
                     if (board[x][y].typePiece == PION && board[x][y].couleurPiece != r + 1) {
                         echec = r + 1;
+                        break;
                     }
                 }
                 if (!verifFou(board, tempMove)) {
@@ -375,4 +279,36 @@ int verifEchec(Piece **board, int taillePlateau) {
     free(rois);
     free(tempMove);
     return echec;
+}
+
+int verifMat(Piece **board, int taillePlateau, int joueur) {
+    Piece previous;
+    int **tempMove = (int **) malloc(2 * sizeof(int));
+    tempMove[0] = (int *) malloc(2 * sizeof(int));
+    tempMove[1] = (int *) malloc(2 * sizeof(int));
+
+    for (int xa = 0; xa < taillePlateau; ++xa) {
+        for (int ya = 0; ya < taillePlateau; ++ya) {
+            if (board[xa][ya].couleurPiece == joueur) {
+                for (int xb = 0; xb < taillePlateau; ++xb) {
+                    for (int yb = 0; yb < taillePlateau; ++yb) {
+                        tempMove[0][0] = xa;
+                        tempMove[0][1] = xb;
+                        tempMove[1][0] = ya;
+                        tempMove[1][1] = yb;
+                        if (!verifMouvement(board, tempMove, joueur)) {
+                            previous = board[xa][ya];
+                            executeMove(board, tempMove);
+                            if (!(verifEchec(board, taillePlateau) == joueur)) {
+                                undoMove(board, tempMove, previous);
+                                return 0;
+                            }
+                            undoMove(board, tempMove, previous);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return 1;
 }
