@@ -95,6 +95,8 @@ int main() {
                 if (action == 2) break;
             } while (verifDeplacement(board, move, joueur, taillePlateau, &echec));
             if (action == 2) break;
+            executeMove(board, move);
+
             switch (echec) {
                 default:
                     break;

@@ -41,11 +41,11 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, i
             previous = board[move[0][1]][move[1][1]];
             executeMove(board, move);
             *echec = verifEchec(board, taillePlateau);
+            undoMove(board, move, previous);
             if (*echec == joueur) {
                 validite = 7;   //echec
-                undoMove(board, move, previous);
             } else if (*echec != 0) {
-                if (verifMat(board, taillePlateau, -1 * (joueur - 3)))*echec = 3;
+                if (verifMat(board, taillePlateau, -1 * (joueur - 3))) *echec = 3;
             }
         }
     }
@@ -130,8 +130,7 @@ int verifPion(Piece **board, int **move, int joueur) {
  * @return 4 si le mouvement n'est pas possible, 5 si une pièce est sur la trajectoire de la pièce ou 0 si le mouvement est valide
  */
 int verifFou(Piece **board, int **move) {
-
-    if (abs((move[0][1] - move[0][0]) == abs(move[1][1] - move[1][0]))) {
+    if (abs(move[0][1] - move[0][0]) == abs(move[1][1] - move[1][0])) {
         for (int i = 1; i < abs((move[0][0] - move[0][1])); i++) {
             if (board[move[0][0] + i * sign(move[0][1] - move[0][0])][move[1][0] + i * sign(move[1][1] -
                                                                                             move[1][0])].typePiece !=
@@ -228,9 +227,11 @@ int verifEchec(Piece **board, int taillePlateau) {
     tempMove[0] = (int *) malloc(2 * sizeof(int));
     tempMove[1] = (int *) malloc(2 * sizeof(int));
     int echec = 0;
-    int r = 0, y = 0, x = 0;
+    int r = 0, y, x;
     while (r < 2 && !echec) {
+        y = 0;
         while (y < taillePlateau && !echec) {
+            x = 0;
             while (x < taillePlateau && !echec) {
                 tempMove[0][0] = x;
                 tempMove[0][1] = rois[r][0];
@@ -239,42 +240,39 @@ int verifEchec(Piece **board, int taillePlateau) {
                 if (!verifPion(board, tempMove, -1 * (r - 2))) {
                     if (board[x][y].typePiece == PION && board[x][y].couleurPiece != r + 1) {
                         echec = r + 1;
-                        break;
                     }
                 }
                 if (!verifFou(board, tempMove)) {
                     if (board[x][y].typePiece == FOU && board[x][y].couleurPiece != r + 1) {
                         echec = r + 1;
-                        break;
                     }
                 }
                 if (!verifCavalier(tempMove)) {
                     if (board[x][y].typePiece == CAVALIER && board[x][y].couleurPiece != r + 1) {
                         echec = r + 1;
-                        break;
                     }
                 }
                 if (!verifTour(board, tempMove)) {
                     if (board[x][y].typePiece == TOUR && board[x][y].couleurPiece != r + 1) {
                         echec = r + 1;
-                        break;
                     }
                 }
                 if (!verifDame(board, tempMove)) {
                     if (board[x][y].typePiece == DAME && board[x][y].couleurPiece != r + 1) {
                         echec = r + 1;
-                        break;
                     }
                 }
                 if (!verifRoi(tempMove)) {
                     if (board[x][y].typePiece == ROI && board[x][y].couleurPiece != r + 1) {
                         echec = r + 1;
-                        break;
                     }
                 }
                 if (echec) printf("x:%d y:%d r:%d\n", x, y, r + 1);
+                x++;
             }
+            y++;
         }
+        r++;
     }
     free(rois);
     free(tempMove);
