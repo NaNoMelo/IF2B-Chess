@@ -103,4 +103,5 @@ void chercherRois(Piece **board, int taillePlateau, int **rois) {
             }
         }
     }
+    printf("Rois :\n%d %d\n%d %d\n", rois[0][0], rois[0][1], rois[1][0], rois[1][1]);
 }

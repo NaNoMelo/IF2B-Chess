@@ -14,6 +14,8 @@
 #include "save.h"
 
 void saveGame(FILE *save, Piece **board, int taillePlateau, int tour) {
+    printf("save\n");
+    rewind(save);
     fprintf(save, "%d\n%d\n", taillePlateau, tour);
     for (int y = 0; y < taillePlateau; ++y) {
         for (int x = 0; x < taillePlateau; ++x) {

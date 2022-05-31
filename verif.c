@@ -97,29 +97,29 @@ int verifMouvement(Piece **board, int **move, int joueur) {
  * @return
  */
 int verifPion(Piece **board, int **move, int joueur) {
-
     joueur *= 2; //2 pour joueur 1, 4 pour joueur 2
     joueur -= 3; //-1 pour joueur 1, 1 pour joueur 2
 
     if (sign(move[1][1] - move[1][0]) == joueur) {
-        if (move[0][1] - move[0][0] == 0) {
-            if (board[move[0][0]][move[1][0]].nbMove > 0) {
-                if (abs(move[1][1] - move[1][0]) > 1) {
-                    return 4;
-                } else if (board[move[0][1]][move[1][1]].typePiece != VIDE) {
-                    return 5;
-                } else return 0;
-            } else {
-                if (abs(move[1][1] - move[1][0]) > 2) {
-                    return 4;
-                } else if (board[move[0][1]][move[1][1] - joueur].typePiece != VIDE ||
-                           board[move[0][1]][move[1][1]].typePiece != VIDE) {
-                    return 5;
-                } else return 0;
+        if (board[move[0][0]][move[1][0]].nbMove > 0) {
+            if (abs(move[1][1] - move[1][0]) > 1) {
+                return 4;
             }
-        } else if (abs(move[1][1] - move[1][0]) > 1 || abs(move[0][1] - move[0][0]) > 1) {
-            return 4;
-        } else return 0;
+        } else {
+            if (abs(move[1][1] - move[1][0]) > 2) {
+                return 4;
+            }
+        }
+
+        if (move[0][1] - move[0][0] == 0) {
+            if (board[move[0][1]][move[1][1]].typePiece != VIDE) return 5;
+            if (abs(move[0][1] - move[0][0]) == 2 && board[move[0][1]][move[1][1] - joueur].typePiece != VIDE) {
+                return 5;
+            }
+        } else if (abs(move[0][1] - move[0][0]) == 1 && abs(move[1][1] - move[1][0]) == 1 &&
+                   board[move[0][1]][move[1][1]].typePiece != VIDE) {
+            return 0;
+        } else return 4;
     } else return 4;
 }
 
@@ -150,7 +150,6 @@ int verifFou(Piece **board, int **move) {
  * @return 0 si le mouvement est possible, 4 si il n'est pas possible
  */
 int verifCavalier(int **move) {
-
     if (abs(move[0][1] - move[0][0]) + abs(move[1][1] - move[1][0]) == 3 &&
         (abs(move[0][1] - move[0][0]) < 3 && abs(move[0][1] - move[0][0]) > 0)) {
         return 0;
@@ -285,11 +284,16 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
     tempMove[0] = (int *) malloc(2 * sizeof(int));
     tempMove[1] = (int *) malloc(2 * sizeof(int));
 
-    for (int xa = 0; xa < taillePlateau; ++xa) {
-        for (int ya = 0; ya < taillePlateau; ++ya) {
+    int xa = 0, ya, xb, yb;
+
+    while (xa < taillePlateau) {
+        ya = 0;
+        while (ya < taillePlateau) {
             if (board[xa][ya].couleurPiece == joueur) {
-                for (int xb = 0; xb < taillePlateau; ++xb) {
-                    for (int yb = 0; yb < taillePlateau; ++yb) {
+                xb = 0;
+                while (xb < taillePlateau) {
+                    yb = 0;
+                    while (yb < taillePlateau) {
                         tempMove[0][0] = xa;
                         tempMove[0][1] = xb;
                         tempMove[1][0] = ya;
@@ -297,16 +301,21 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
                         if (!verifMouvement(board, tempMove, joueur)) {
                             previous = board[xa][ya];
                             executeMove(board, tempMove);
-                            if (!(verifEchec(board, taillePlateau) == joueur)) {
+                            if (verifEchec(board, taillePlateau) != joueur) {
                                 undoMove(board, tempMove, previous);
+                                printf("Mat :\n%d %d\n%d %d\n", xa, ya, xb, yb);
                                 return 0;
                             }
                             undoMove(board, tempMove, previous);
                         }
+                        yb++;
                     }
+                    xb++;
                 }
             }
+            ya++;
         }
+        xa++;
     }
     return 1;
 }
