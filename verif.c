@@ -97,30 +97,34 @@ int verifMouvement(Piece **board, int **move, int joueur) {
  * @return
  */
 int verifPion(Piece **board, int **move, int joueur) {
+    int pion = 0;
     joueur *= 2; //2 pour joueur 1, 4 pour joueur 2
     joueur -= 3; //-1 pour joueur 1, 1 pour joueur 2
 
     if (sign(move[1][1] - move[1][0]) == joueur) {
         if (board[move[0][0]][move[1][0]].nbMove > 0) {
             if (abs(move[1][1] - move[1][0]) > 1) {
-                return 4;
+                pion = 4;
             }
         } else {
             if (abs(move[1][1] - move[1][0]) > 2) {
-                return 4;
+                pion = 4;
             }
         }
 
-        if (move[0][1] - move[0][0] == 0) {
-            if (board[move[0][1]][move[1][1]].typePiece != VIDE) return 5;
-            if (abs(move[0][1] - move[0][0]) == 2 && board[move[0][1]][move[1][1] - joueur].typePiece != VIDE) {
-                return 5;
-            }
-        } else if (abs(move[0][1] - move[0][0]) == 1 && abs(move[1][1] - move[1][0]) == 1 &&
-                   board[move[0][1]][move[1][1]].typePiece != VIDE) {
-            return 0;
-        } else return 4;
-    } else return 4;
+        if (!pion) {
+            if (move[0][1] - move[0][0] == 0) {
+                if (board[move[0][1]][move[1][1]].typePiece != VIDE) pion = 5;
+                if (abs(move[0][1] - move[0][0]) == 2 && board[move[0][1]][move[1][1] - joueur].typePiece != VIDE) {
+                    pion = 5;
+                }
+            } else if (abs(move[0][1] - move[0][0]) == 1 && abs(move[1][1] - move[1][0]) == 1 &&
+                       board[move[0][1]][move[1][1]].typePiece != VIDE) {
+                pion = 0;
+            } else pion = 4;
+        } else pion = 4;
+    }
+    return pion;
 }
 
 /**
@@ -130,18 +134,19 @@ int verifPion(Piece **board, int **move, int joueur) {
  * @return 4 si le mouvement n'est pas possible, 5 si une pièce est sur la trajectoire de la pièce ou 0 si le mouvement est valide
  */
 int verifFou(Piece **board, int **move) {
+    int fou = 0;
     if (abs(move[0][1] - move[0][0]) == abs(move[1][1] - move[1][0])) {
         for (int i = 1; i < abs((move[0][0] - move[0][1])); i++) {
             if (board[move[0][0] + i * sign(move[0][1] - move[0][0])][move[1][0] + i * sign(move[1][1] -
                                                                                             move[1][0])].typePiece !=
                 VIDE) {
-                return 5;
+                fou = 5;
             }
         }
     } else {
-        return 4;
+        fou = 4;
     }
-    return 0;
+    return fou;
 }
 
 /**
@@ -150,12 +155,12 @@ int verifFou(Piece **board, int **move) {
  * @return 0 si le mouvement est possible, 4 si il n'est pas possible
  */
 int verifCavalier(int **move) {
-    if (abs(move[0][1] - move[0][0]) + abs(move[1][1] - move[1][0]) == 3 &&
-        (abs(move[0][1] - move[0][0]) < 3 && abs(move[0][1] - move[0][0]) > 0)) {
-        return 0;
-    } else {
-        return 4;
+    int cavalier = 0;
+    if (!(abs(move[0][1] - move[0][0]) + abs(move[1][1] - move[1][0]) == 3 &&
+          (abs(move[0][1] - move[0][0]) < 3 && abs(move[0][1] - move[0][0]) > 0))) {
+        cavalier = 4;
     }
+    return cavalier;
 }
 
 /**
@@ -165,19 +170,19 @@ int verifCavalier(int **move) {
  * @return 0 si le mouvement est possible, 4 si il n'est pas valide, 5 si il y a une pièce sur la trajectoire
  */
 int verifTour(Piece **board, int **move) {
-    if (abs(move[1][1] - move[1][0]) == 0 ||
-        abs(move[0][1] - move[0][0]) == 0) {
+    int tour = 0;
+    if (abs(move[1][1] - move[1][0]) == 0 || abs(move[0][1] - move[0][0]) == 0) {
         for (int i = 1; i < abs(move[0][1] - move[0][0]) + abs(move[1][1] - move[1][0]); i++) {
             if (board[move[0][0] + i * sign(move[0][1] - move[0][0])][move[1][0] + i * sign(move[1][1] -
                                                                                             move[1][0])].typePiece !=
                 VIDE) {
-                return 5;
+                tour = 5;
             }
         }
     } else {
-        return 4;
+        tour = 4;
     }
-    return 0;
+    return tour;
 }
 
 /**
@@ -187,14 +192,16 @@ int verifTour(Piece **board, int **move) {
  * @return 0 si le mouvement est possible, tour/fou qui contient le numéro d'erreur relié à la tour ou au fou
  */
 int verifDame(Piece **board, int **move) {
+    int dame;
     int tour = verifTour(board, move), fou = verifFou(board, move);
     if (tour == 0 || fou == 0) {
-        return 0;
+        dame = 0;
     } else if (tour > fou) {
-        return tour;
+        dame = tour;
     } else {
-        return fou;
+        dame = fou;
     }
+    return dame;
 }
 
 /**
@@ -203,11 +210,13 @@ int verifDame(Piece **board, int **move) {
  * @return 0 si le mouvement est possible, 4 si le mouvement n'est pas valide
  */
 int verifRoi(int **move) {
+    int roi;
     if (abs(move[1][1] - move[1][0]) <= 1 && abs(move[0][1] - move[0][0]) <= 1) {
-        return 0;
+        roi = 0;
     } else {
-        return 4;
+        roi = 4;
     }
+    return roi;
 }
 
 /**
@@ -280,6 +289,8 @@ int verifEchec(Piece **board, int taillePlateau) {
 
 int verifMat(Piece **board, int taillePlateau, int joueur) {
     Piece previous;
+    bool mat = true;
+    int echec;
     int **tempMove = (int **) malloc(2 * sizeof(int));
     tempMove[0] = (int *) malloc(2 * sizeof(int));
     tempMove[1] = (int *) malloc(2 * sizeof(int));
@@ -301,12 +312,12 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
                         if (!verifMouvement(board, tempMove, joueur)) {
                             previous = board[xa][ya];
                             executeMove(board, tempMove);
-                            if (verifEchec(board, taillePlateau) != joueur) {
-                                undoMove(board, tempMove, previous);
-                                printf("Mat :\n%d %d\n%d %d\n", xa, ya, xb, yb);
-                                return 0;
-                            }
+                            echec = verifEchec(board, taillePlateau);
                             undoMove(board, tempMove, previous);
+                            if (echec != joueur) {
+                                printf("Mat :\n%d %d\n%d %d\n", xa, ya, xb, yb);
+                                mat = false;
+                            }
                         }
                         yb++;
                     }
@@ -317,5 +328,5 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
         }
         xa++;
     }
-    return 1;
+    return mat;
 }
