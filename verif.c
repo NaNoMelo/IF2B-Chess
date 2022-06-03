@@ -297,14 +297,14 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
 
     int xa = 0, ya, xb, yb;
 
-    while (xa < taillePlateau) {
+    while (xa < taillePlateau && mat) {
         ya = 0;
-        while (ya < taillePlateau) {
+        while (ya < taillePlateau && mat) {
             if (board[xa][ya].couleurPiece == joueur) {
                 xb = 0;
-                while (xb < taillePlateau) {
+                while (xb < taillePlateau && mat) {
                     yb = 0;
-                    while (yb < taillePlateau) {
+                    while (yb < taillePlateau && mat) {
                         tempMove[0][0] = xa;
                         tempMove[0][1] = xb;
                         tempMove[1][0] = ya;

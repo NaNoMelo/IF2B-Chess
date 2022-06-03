@@ -36,7 +36,25 @@ void genererPlateau(int taille, Piece **board) {
         }
     }
 }
-
+/**
+ * 0 = noir
+ * 1 = bleu
+ * 2 = vert clair
+ * 3 = cyan
+ * 4 = rouge
+ * 5 = rose
+ * 6 = jaune
+ * 7 = gris
+ * 8 =
+ * 9 =
+ * 10 =
+ * 11 =
+ * 12 =
+ * 13 =
+ * 14 =
+ * 15 =
+ * 16 =
+ */
 /**
  * Fonction affichant le plateau sur la console
  * @param taille
@@ -55,14 +73,18 @@ void afficherPlateau(int taille, Piece **board) {
                     printf(" %d", y);
                     if (y < 10) printf(" ");
                 } else {
+                    setColor((x + y) % 2 * (WHITE - BLEU_FONCE) + BLEU_FONCE,
+                             (x + y + 1) % 2 * (WHITE - BLEU_FONCE) + BLEU_FONCE);
                     printf(" %c%c", pieces[board[x - 1][y - 1].typePiece],
                            couleurs[board[x - 1][y - 1].couleurPiece]);
                 }
             }
 
             if (x == taille) printf("\n");
+            setColor(WHITE, BLACK);
         }
     }
+
 }
 
 /**
