@@ -96,20 +96,21 @@ int main() {
             } while (verifDeplacement(board, move, joueur, taillePlateau, &echec));
             if (action == 2) break;
             executeMove(board, move);
-
-            switch (echec) {
-                default:
-                    break;
-                case 1:
-                    printf("Echec pour le joueur Blanc !\n");
-                    break;
-                case 2:
-                    printf("Echec pour le joueur Noir !\n");
-                    break;
-                case 3:
-                    printf("Echec et Mat ! Victoire pour le joueur %d\n", joueur);
-                    partie = false;
-                    break;
+            printf("execute into mat");
+            if (echec == -1 * (joueur - 3) && verifMat(board, taillePlateau, -1 * (joueur - 3))) {
+                printf("Echec et Mat ! Victoire pour le joueur %d\n", joueur);
+                partie = false;
+            } else {
+                switch (echec) {
+                    default:
+                        break;
+                    case 1:
+                        printf("Echec pour le joueur Blanc !\n");
+                        break;
+                    case 2:
+                        printf("Echec pour le joueur Noir !\n");
+                        break;
+                }
             }
             tour++;
         }

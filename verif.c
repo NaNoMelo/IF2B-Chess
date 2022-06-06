@@ -44,8 +44,6 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, i
             undoMove(board, move, previous);
             if (*echec == joueur) {
                 validite = 7;   //echec
-            } else if (*echec != 0) {
-                if (verifMat(board, taillePlateau, -1 * (joueur - 3))) *echec = 3;
             }
         }
     }
@@ -275,7 +273,7 @@ int verifEchec(Piece **board, int taillePlateau) {
                         echec = r + 1;
                     }
                 }
-                if (echec) printf("x:%d y:%d r:%d\n", x, y, r + 1);
+                //if (echec) printf("x:%d y:%d r:%d\n", x, y, r + 1);
                 x++;
             }
             y++;
@@ -301,6 +299,7 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
         ya = 0;
         while (ya < taillePlateau && mat) {
             if (board[xa][ya].couleurPiece == joueur) {
+                previous = board[xa][ya];
                 xb = 0;
                 while (xb < taillePlateau && mat) {
                     yb = 0;
@@ -310,7 +309,6 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
                         tempMove[1][0] = ya;
                         tempMove[1][1] = yb;
                         if (!verifMouvement(board, tempMove, joueur)) {
-                            previous = board[xa][ya];
                             executeMove(board, tempMove);
                             echec = verifEchec(board, taillePlateau);
                             undoMove(board, tempMove, previous);
@@ -328,5 +326,6 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
         }
         xa++;
     }
+    free(tempMove);
     return mat;
 }
