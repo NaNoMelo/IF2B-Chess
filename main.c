@@ -10,7 +10,7 @@
 #include "save.h"
 
 int main() {
-    int taillePlateau, **move, tour, joueur, action, menu, echec;
+    int taillePlateau, **move, tour, joueur, action, menu, echec, validite;
     bool partie, saveAvailable, ready;
     Piece **board;
 
@@ -93,24 +93,29 @@ int main() {
                     if (action == 2) break;
                 } while (action);
                 if (action == 2) break;
-            } while (verifDeplacement(board, move, joueur, taillePlateau, &echec));
+                validite = verifDeplacement(board, move, joueur, taillePlateau, &echec);
+                printErr(validite);
+            } while (validite);
             if (action == 2) break;
             executeMove(board, move);
-            printf("execute into mat");
-            if (echec == -1 * (joueur - 3) && verifMat(board, taillePlateau, -1 * (joueur - 3))) {
-                printf("Echec et Mat ! Victoire pour le joueur %d\n", joueur);
-                partie = false;
-            } else {
-                switch (echec) {
-                    default:
-                        break;
-                    case 1:
-                        printf("Echec pour le joueur Blanc !\n");
-                        break;
-                    case 2:
-                        printf("Echec pour le joueur Noir !\n");
-                        break;
+            if (echec == -1 * (joueur - 3)) {
+                printf("verif mat\n");
+                if (verifMat(board, taillePlateau, -1 * (joueur - 3))) {
+                    printf("Echec et Mat ! Victoire pour le joueur %d\n", joueur);
+                    partie = false;
+                } else {
+                    printf("pas mat");
                 }
+            }
+            switch (echec) {
+                default:
+                    break;
+                case 1:
+                    printf("Echec pour le joueur Blanc !\n");
+                    break;
+                case 2:
+                    printf("Echec pour le joueur Noir !\n");
+                    break;
             }
             tour++;
         }

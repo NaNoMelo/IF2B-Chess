@@ -47,7 +47,6 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, i
             }
         }
     }
-    printErr(validite);
     return validite;
 }
 
@@ -98,7 +97,6 @@ int verifPion(Piece **board, int **move, int joueur) {
     int pion = 0;
     joueur *= 2; //2 pour joueur 1, 4 pour joueur 2
     joueur -= 3; //-1 pour joueur 1, 1 pour joueur 2
-
     if (sign(move[1][1] - move[1][0]) == joueur) {
         if (board[move[0][0]][move[1][0]].nbMove > 0) {
             if (abs(move[1][1] - move[1][0]) > 1) {
@@ -121,7 +119,7 @@ int verifPion(Piece **board, int **move, int joueur) {
                 pion = 0;
             } else pion = 4;
         } else pion = 4;
-    }
+    } else pion = 4;
     return pion;
 }
 
@@ -141,9 +139,7 @@ int verifFou(Piece **board, int **move) {
                 fou = 5;
             }
         }
-    } else {
-        fou = 4;
-    }
+    } else fou = 4;
     return fou;
 }
 
@@ -299,7 +295,6 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
         ya = 0;
         while (ya < taillePlateau && mat) {
             if (board[xa][ya].couleurPiece == joueur) {
-                previous = board[xa][ya];
                 xb = 0;
                 while (xb < taillePlateau && mat) {
                     yb = 0;
@@ -309,9 +304,11 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
                         tempMove[1][0] = ya;
                         tempMove[1][1] = yb;
                         if (!verifMouvement(board, tempMove, joueur)) {
+                            previous = board[xb][yb];
                             executeMove(board, tempMove);
                             echec = verifEchec(board, taillePlateau);
                             undoMove(board, tempMove, previous);
+                            printf("%d", echec);
                             if (echec != joueur) {
                                 printf("Mat :\n%d %d\n%d %d\n", xa, ya, xb, yb);
                                 mat = false;
