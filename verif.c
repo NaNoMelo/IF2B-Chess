@@ -226,7 +226,7 @@ int verifEchec(Piece **board, int taillePlateau) {
     rois[1] = (int *) malloc(2 * sizeof(int));
     chercherRois(board, taillePlateau, rois);
     //printf("Rois :\n%d %d\n%d %d\n",rois[0][0],rois[0][1],rois[1][0],rois[1][1]);
-    int **tempMove = (int **) malloc(2 * sizeof(int));
+    int **tempMove = (int **) malloc(2 * sizeof(int *));
     tempMove[0] = (int *) malloc(2 * sizeof(int));
     tempMove[1] = (int *) malloc(2 * sizeof(int));
     int echec = 0;
@@ -240,33 +240,33 @@ int verifEchec(Piece **board, int taillePlateau) {
                 tempMove[0][1] = rois[r][0];
                 tempMove[1][0] = y;
                 tempMove[1][1] = rois[r][1];
-                if (!verifPion(board, tempMove, -1 * (r - 2))) {
-                    if (board[x][y].typePiece == PION && board[x][y].couleurPiece != r + 1) {
+                if (board[x][y].typePiece == PION && board[x][y].couleurPiece != r + 1) {
+                    if (!verifPion(board, tempMove, -1 * (r - 2))) {
                         echec = r + 1;
                     }
                 }
-                if (!verifFou(board, tempMove)) {
-                    if (board[x][y].typePiece == FOU && board[x][y].couleurPiece != r + 1) {
+                if (board[x][y].typePiece == FOU && board[x][y].couleurPiece != r + 1) {
+                    if (!verifFou(board, tempMove)) {
                         echec = r + 1;
                     }
                 }
-                if (!verifCavalier(tempMove)) {
-                    if (board[x][y].typePiece == CAVALIER && board[x][y].couleurPiece != r + 1) {
+                if (board[x][y].typePiece == CAVALIER && board[x][y].couleurPiece != r + 1) {
+                    if (!verifCavalier(tempMove)) {
                         echec = r + 1;
                     }
                 }
-                if (!verifTour(board, tempMove)) {
-                    if (board[x][y].typePiece == TOUR && board[x][y].couleurPiece != r + 1) {
+                if (board[x][y].typePiece == TOUR && board[x][y].couleurPiece != r + 1) {
+                    if (!verifTour(board, tempMove)) {
                         echec = r + 1;
                     }
                 }
-                if (!verifDame(board, tempMove)) {
-                    if (board[x][y].typePiece == DAME && board[x][y].couleurPiece != r + 1) {
+                if (board[x][y].typePiece == DAME && board[x][y].couleurPiece != r + 1) {
+                    if (!verifDame(board, tempMove)) {
                         echec = r + 1;
                     }
                 }
-                if (!verifRoi(tempMove)) {
-                    if (board[x][y].typePiece == ROI && board[x][y].couleurPiece != r + 1) {
+                if (board[x][y].typePiece == ROI && board[x][y].couleurPiece != r + 1) {
+                    if (!verifRoi(tempMove)) {
                         echec = r + 1;
                     }
                 }
@@ -277,7 +277,11 @@ int verifEchec(Piece **board, int taillePlateau) {
         }
         r++;
     }
+    free(rois[0]);
+    free(rois[1]);
     free(rois);
+    free(tempMove[0]);
+    free(tempMove[1]);
     free(tempMove);
     return echec;
 }
@@ -286,7 +290,7 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
     Piece previous;
     bool mat = true;
     int echec;
-    int **tempMove = (int **) malloc(2 * sizeof(int));
+    int **tempMove = (int **) malloc(2 * sizeof(int *));
     tempMove[0] = (int *) malloc(2 * sizeof(int));
     tempMove[1] = (int *) malloc(2 * sizeof(int));
 
@@ -309,7 +313,6 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
                             executeMove(board, tempMove);
                             echec = verifEchec(board, taillePlateau);
                             undoMove(board, tempMove, previous);
-                            printf("%d", echec);
                             if (echec != joueur) {
                                 printf("Mat :\n%d %d\n%d %d\n", xa, ya, xb, yb);
                                 mat = false;
@@ -324,6 +327,8 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
         }
         xa++;
     }
+    free(tempMove[0]);
+    free(tempMove[1]);
     free(tempMove);
     return mat;
 }

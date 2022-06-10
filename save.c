@@ -39,4 +39,5 @@ void loadGame(Piece **board, int taillePlateau, int *tour) {
             fscanf(save, "%d", &board[x][y].nbMove);
         }
     }
+    fclose(save);
 }

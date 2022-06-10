@@ -74,7 +74,6 @@ int main() {
         free(board[i]);
     }
     free(board);
-    fclose(save);
 //}while(true);
     return 0;
 }
