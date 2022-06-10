@@ -7,8 +7,8 @@
 
 #include "board.h"
 
-void loadGame(FILE *save, Piece **board, int taillePlateau, int *tour);
+void loadGame(Piece **board, int taillePlateau, int *tour);
 
-void saveGame(FILE *save, Piece **board, int taillePlateau, int tour);
+void saveGame(Piece **board, int taillePlateau, int tour);
 
 #endif //IF2B_CHESS_SAVE_H

@@ -4,4 +4,4 @@ project(IF2B_Chess C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(IF2B_Chess
-        main.c saisie.c saisie.h board.c board.h verif.c verif.h save.c save.h)
+        main.c saisie.c saisie.h board.c board.h verif.c verif.h save.c save.h global.c global.h)

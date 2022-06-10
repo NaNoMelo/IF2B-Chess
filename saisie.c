@@ -12,6 +12,7 @@
 #include "ctype.h"
 #include "verif.h"
 #include "board.h"
+#include <windows.h>
 
 /**
  * Fonction demandant au joueur quuel options du menu il souhaite selectionner
@@ -130,4 +131,9 @@ void printErr(int validite) {
         case 7:
             printf("Echec\n");
     }
+}
+
+void setColor(Couleur texte, Couleur fond) {
+    HANDLE H = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(H, fond * 16 + texte);
 }

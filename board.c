@@ -55,14 +55,18 @@ void afficherPlateau(int taille, Piece **board) {
                     printf(" %d", y);
                     if (y < 10) printf(" ");
                 } else {
+                    setColor((x + y) % 2 * (WHITE - BLEU_FONCE) + BLEU_FONCE,
+                             (x + y + 1) % 2 * (WHITE - BLEU_FONCE) + BLEU_FONCE);
                     printf(" %c%c", pieces[board[x - 1][y - 1].typePiece],
                            couleurs[board[x - 1][y - 1].couleurPiece]);
                 }
             }
 
             if (x == taille) printf("\n");
+            setColor(WHITE, BLACK);
         }
     }
+
 }
 
 /**
@@ -103,4 +107,5 @@ void chercherRois(Piece **board, int taillePlateau, int **rois) {
             }
         }
     }
+    //printf("Rois :\n%d %d\n%d %d\n", rois[0][0], rois[0][1], rois[1][0], rois[1][1]);
 }
