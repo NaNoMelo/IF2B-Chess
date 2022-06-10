@@ -13,7 +13,8 @@
 #include "verif.h"
 #include "save.h"
 
-void saveGame(FILE *save, Piece **board, int taillePlateau, int tour) {
+void saveGame(Piece **board, int taillePlateau, int tour) {
+    FILE *save = fopen("./save.txt", "w");
     printf("save\n");
     rewind(save);
     fprintf(save, "%d\n%d\n", taillePlateau, tour);
@@ -23,9 +24,12 @@ void saveGame(FILE *save, Piece **board, int taillePlateau, int tour) {
                     board[x][y].nbMove);
         }
     }
+    fclose(save);
 }
 
-void loadGame(FILE *save, Piece **board, int taillePlateau, int *tour) {
+void loadGame(Piece **board, int taillePlateau, int *tour) {
+    FILE *save = fopen("./save.txt", "r");
+    fscanf(save, "%d", &taillePlateau);
     fscanf(save, "%d", tour);
     printf("Tour : %d\n", *tour);
     for (int y = 0; y < taillePlateau; ++y) {

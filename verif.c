@@ -24,6 +24,7 @@
 int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, int *echec) {
     int validite;
     Piece previous;
+
     if (board[move[0][0]][move[1][0]].typePiece == VIDE) {
         validite = 1;       //mouvement case vide
     } else if (board[move[0][0]][move[1][0]].couleurPiece != joueur) {
