@@ -308,13 +308,10 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
                         tempMove[0][1] = xb;
                         tempMove[1][0] = ya;
                         tempMove[1][1] = yb;
-                        if (!verifMouvement(board, tempMove, joueur)) {
-                            previous = board[xb][yb];
-                            executeMove(board, tempMove);
-                            echec = verifEchec(board, taillePlateau);
-                            undoMove(board, tempMove, previous);
+
+                        if (!verifDeplacement(board, tempMove, joueur, taillePlateau, &echec)) {
                             if (echec != joueur) {
-                                printf("Mat :\n%d %d\n%d %d\n", xa, ya, xb, yb);
+                                printf("Mat :\n%d %d\n%d %d\n", xa, xb, ya, yb);
                                 mat = false;
                             }
                         }

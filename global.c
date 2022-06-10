@@ -13,7 +13,12 @@
 #include "board.h"
 #include "verif.h"
 #include "save.h"
-
+/**
+ *
+ * @param board
+ * @param tour
+ * @param taillePlateau
+ */
 void game(Piece **board, int tour, int taillePlateau) {
     int **move = (int **) malloc(sizeof(int *) * 2);
     for (int i = 0; i < 2; i++) {
@@ -36,36 +41,41 @@ void game(Piece **board, int tour, int taillePlateau) {
                         break;
                     case 2:
                         printf("Abandon du joueur %d !\n", joueur);
+                        partie = false;
                         break;
                     case 3:
+                        partie = false;
                         break;
                 }
-            } while (action);
-
-            validite = verifDeplacement(board, move, joueur, taillePlateau, &echec);
-            printErr(validite);
-        } while (validite);
-        executeMove(board, move);
-        if (echec == -1 * (joueur - 3)) {
-            printf("verif mat\n");
-            if (verifMat(board, taillePlateau, -1 * (joueur - 3))) {
-                printf("Echec et Mat ! Victoire pour le joueur %d\n", joueur);
-                partie = false;
-            } else {
-                printf("pas mat");
+            } while (action && partie);
+            if (partie) {
+                validite = verifDeplacement(board, move, joueur, taillePlateau, &echec);
+                printErr(validite);
             }
+        } while (validite && partie);
+        if (partie) {
+            executeMove(board, move);
+            if (echec == -1 * (joueur - 3)) {
+                printf("verif mat\n");
+                if (verifMat(board, taillePlateau, -1 * (joueur - 3))) {
+                    printf("Echec et Mat ! Victoire pour le joueur %d\n", joueur);
+                    partie = false;
+                } else {
+                    printf("pas mat");
+                }
+            }
+            switch (echec) {
+                default:
+                    break;
+                case 1:
+                    printf("Echec pour le joueur Blanc !\n");
+                    break;
+                case 2:
+                    printf("Echec pour le joueur Noir !\n");
+                    break;
+            }
+            tour++;
         }
-        switch (echec) {
-            default:
-                break;
-            case 1:
-                printf("Echec pour le joueur Blanc !\n");
-                break;
-            case 2:
-                printf("Echec pour le joueur Noir !\n");
-                break;
-        }
-        tour++;
     }
 
     for (int i = 0; i < 2; ++i) {

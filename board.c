@@ -36,25 +36,7 @@ void genererPlateau(int taille, Piece **board) {
         }
     }
 }
-/**
- * 0 = noir
- * 1 = bleu
- * 2 = vert clair
- * 3 = cyan
- * 4 = rouge
- * 5 = rose
- * 6 = jaune
- * 7 = gris
- * 8 =
- * 9 =
- * 10 =
- * 11 =
- * 12 =
- * 13 =
- * 14 =
- * 15 =
- * 16 =
- */
+
 /**
  * Fonction affichant le plateau sur la console
  * @param taille
