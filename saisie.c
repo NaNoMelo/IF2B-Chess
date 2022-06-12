@@ -84,8 +84,8 @@ int askDeplacement(int taillePlateau, int joueur, int **move) {
 
 /**
  * Fonction permet de poser une question à l’utilisateur à laquelle il peut répondre par oui ou par non.
- * @param question
- * @return rep = true ou false
+ * @param question chaîne de caractères contenant une question binaire
+ * @return true si "oui" false si "non"
  */
 bool askOuiNon(char *question) {
     char reponse[10];
@@ -109,18 +109,18 @@ bool askOuiNon(char *question) {
 }
 
 /**
- * Fonction servant à sauvegarder le signe d'un nombre
- * @param nombre
- * @return 1 si le nombre est positif et -1 si il est négatif
+ * Fonction servant à obtenir le signe d'un nombre
+ * @param nombre nombre à analyser
+ * @return 1 si le nombre est positif, -1 si il est négatif, 0 sinon
  */
 int sign(int nombre) {
     return ((nombre > 0) - (nombre < 0));
 }
 
 /**
- * Fonction affichant sur la console les erreurs dans le mouvement que propose le joueur (si il y en as)6
- * @param validite (contenant les chiffres renvoyés par les fonctions de verification des pièces)
- */
+ * Fonction affichant sur la console les erreurs dans le mouvement que propose le joueur (si il y en as)
+ * @param validite valeur reçue des fonctions de ferification des mouvements
+ * */
 void printErr(int validite) {
     switch (validite) {
         default:
@@ -153,8 +153,8 @@ void printErr(int validite) {
 
 /**
  * Fonction affichant les couleurs sur le texte et le fond
- * @param texte
- * @param fond
+ * @param texte Couleur choisie pour le texte
+ * @param fond Couleur choisie pour le fond
  */
 void setColor(Couleur texte, Couleur fond) {
     HANDLE H = GetStdHandle(STD_OUTPUT_HANDLE);

@@ -5,9 +5,9 @@
 #include "saisie.h"
 
 /**
- * Fonction générant les pièces répartis alléatoirement sur le plateau
- * @param taille
- * @param board
+ * Fonction générant les pièces réparties alléatoirement sur le plateau
+ * @param taille taille du plateau
+ * @param board tableau représentant le plateau de jeu
  */
 void genererPlateau(int taille, Piece **board) {
     srand(time(NULL));
@@ -31,8 +31,8 @@ void genererPlateau(int taille, Piece **board) {
 
 /**
  * Fonction affichant le plateau sur la console
- * @param taille
- * @param board
+ * @param taille taille du plateau
+ * @param board tableau représentant le plateau de jeu
  */
 void afficherPlateau(int taille, Piece **board) {
     char lettres[] = {" abcdefghijkl"};
@@ -63,8 +63,8 @@ void afficherPlateau(int taille, Piece **board) {
 
 /**
  * Fonction effectuant concretement le déplacement choisi par le joueur sur le plateau
- * @param board
- * @param move
+ * @param board tableau représentant le plateau de jeu
+ * @param move tableau à 2 dimensions représentant le mouvement effectué
  */
 void executeMove(Piece **board, int **move) {
     board[move[0][1]][move[1][1]] = board[move[0][0]][move[1][0]];
@@ -74,9 +74,9 @@ void executeMove(Piece **board, int **move) {
 
 /**
  * Fonction retirant le déplacement précédent si la vérification revient fausse
- * @param board
- * @param move
- * @param previous
+ * @param board tableau représentant le plateau de jeu
+ * @param move tableau à 2 dimensions représentant le mouvement effectué
+ * @param previous pièce présente dans la case d'arrivée avant le déplacement
  */
 void undoMove(Piece **board, int **move, Piece previous) {
     board[move[0][0]][move[1][0]] = board[move[0][1]][move[1][1]];
@@ -86,9 +86,9 @@ void undoMove(Piece **board, int **move, Piece previous) {
 
 /**
  * Fonction permettant de localiser un roi sur le plateau
- * @param board
- * @param taillePlateau
- * @param rois
+ * @param board tableau représentant le plateau de jeu
+ * @param taillePlateau taille du plateau
+ * @param rois tableau à 2 dimensions contenant les coordonnées des rois
  */
 void chercherRois(Piece **board, int taillePlateau, int **rois) {
     for (int y = 0; y < taillePlateau; y++) {
@@ -99,5 +99,4 @@ void chercherRois(Piece **board, int taillePlateau, int **rois) {
             }
         }
     }
-    //printf("Rois :\n%d %d\n%d %d\n", rois[0][0], rois[0][1], rois[1][0], rois[1][1]);
 }

@@ -1,4 +1,4 @@
-#include "global.h"
+#include "game.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -9,9 +9,9 @@
 
 /**
  * Fonction centralisant le déroulement d'une partie
- * @param board
- * @param tour
- * @param taillePlateau
+ * @param board tableau représentant le plateau de jeu
+ * @param tour tour auquel le jeu commence
+ * @param taillePlateau taille du plateau
  */
 void game(Piece **board, int tour, int taillePlateau) {
     char strColor[2][10] = {"Blanc", "Noir"};

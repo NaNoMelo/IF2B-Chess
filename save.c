@@ -4,9 +4,9 @@
 
 /**
  * Fonction permettant de sauvegarder la partie en cours
- * @param board
- * @param taillePlateau
- * @param tour
+ * @param board tableau représentant le plateau de jeu
+ * @param taillePlateau taille du plateau
+ * @param tour tour de jeu au moment de la sauvegarde
  */
 void saveGame(Piece **board, int taillePlateau, int tour) {
     FILE *save = fopen("./save.txt", "w");
@@ -23,9 +23,9 @@ void saveGame(Piece **board, int taillePlateau, int tour) {
 
 /**
  * Fonction permettant de charger la dernière partie sauvegarder
- * @param board
- * @param taillePlateau
- * @param tour
+ * @param board tableau représentant le plateau de jeu
+ * @param taillePlateau taille du plateau
+ * @param tour pointeur vers le tour de jeu au moment de la sauvegarde
  */
 void loadGame(Piece **board, int taillePlateau, int *tour) {
     FILE *save = fopen("./save.txt", "r");

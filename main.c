@@ -4,7 +4,7 @@
 #include "saisie.h"
 #include "board.h"
 #include "save.h"
-#include "global.h"
+#include "game.h"
 
 int main() {
     int taillePlateau, tour, menu;

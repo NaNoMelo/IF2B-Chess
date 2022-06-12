@@ -26,6 +26,6 @@ int verifRoi(int **move);
 
 int verifEchec(Piece **board, int taillePlateau, bool tabEchec[2]);
 
-int verifMat(Piece **board, int taillePlateau, int joueur);
+bool verifMat(Piece **board, int taillePlateau, int joueur);
 
 #endif //IF2B_CHESS_VERIF_H
