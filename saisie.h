@@ -33,7 +33,7 @@ int askTaillePlateau();
 
 int askDeplacement(int taillePlateau, int joueur, int **move);
 
-bool askOuiNon(char question[100]);
+bool askOuiNon(char *question);
 
 int sign(int nombre);
 

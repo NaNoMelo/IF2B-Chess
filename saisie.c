@@ -90,17 +90,18 @@ int askDeplacement(int taillePlateau, int joueur, int **move) {
     return action;
 }
 
-bool askOuiNon(char question[100]) {
+bool askOuiNon(char *question) {
     char reponse[10];
+    char help[100];
     bool rep;
-    printf("question : %s", question);
+    printf("%s\n", question);
     fflush(stdin);
-    scanf("%s", reponse);
+    scanf("%s", &reponse);
     strupr(reponse);
-    printf("%s\n", reponse);
-    strcat(question, " (Oui/Non)");
-    while (!(strcmp(reponse, "OUI") == 0) || !(strcmp(reponse, "NON") == 0)) {
-        printf("question : %s", question);
+    strcpy(help, question);
+    strcat(help, " (Oui/Non)");
+    while (!(strcmp(reponse, "OUI") == 0 || strcmp(reponse, "NON") == 0)) {
+        printf("%s\n", help);
         fflush(stdin);
         scanf("%s", reponse);
         strupr(reponse);

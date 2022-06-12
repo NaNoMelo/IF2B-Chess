@@ -16,8 +16,6 @@ int main() {
     bool saveAvailable, ready;
     Piece **board;
     FILE *save;
-    rejouer = (bool) askOuiNon("Shouaitez vous rejouer ?\n");
-    printf("%d", (int) rejouer);
     do {
         saveAvailable = true, ready = false;
 
