@@ -144,5 +144,4 @@ function initMenu(relPath, searchEnabled, serverSide, searchPage, search) {
     }
     $('#main-menu').smartmenus();
 }
-
 /* @license-end */

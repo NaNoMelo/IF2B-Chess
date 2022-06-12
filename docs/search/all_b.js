@@ -1,4 +1,6 @@
 var searchData =
     [
-        ['roi_0', ['ROI', ['../board_8h.html#a2437c4d8f0bf23b8c6c76305ed35ae83a630b67ff829a4c185e65091797e9a03c', 1, 'board.h']]]
+        ['nbmove_0', ['nbMove', ['../struct_piece.html#aa7113f0572b3a55c82dddc54e6dd2002', 1, 'Piece']]],
+        ['noir_1', ['NOIR', ['../board_8h.html#a61fc1f9abcf466b657d085e620b44f76a59e3323a198f0162330111165caaf367', 1, 'board.h']]],
+        ['none_2', ['NONE', ['../board_8h.html#a61fc1f9abcf466b657d085e620b44f76ac157bdf0b85a40d2619cbc8bc1ae5fe2', 1, 'board.h']]]
     ];

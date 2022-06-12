@@ -24,24 +24,25 @@
 */
 var menudata = {
     children: [
-        {text: "Page principale", url: "index.html"},
+        {text: "Main Page", url: "index.html"},
+        {text: "Related Pages", url: "pages.html"},
         {
-            text: "Structures de données", url: "annotated.html", children: [
-                {text: "Structures de données", url: "annotated.html"},
-                {text: "Index des structures de données", url: "classes.html"},
+            text: "Data Structures", url: "annotated.html", children: [
+                {text: "Data Structures", url: "annotated.html"},
+                {text: "Data Structure Index", url: "classes.html"},
                 {
-                    text: "Champs de donnée", url: "functions.html", children: [
-                        {text: "Tout", url: "functions.html"},
+                    text: "Data Fields", url: "functions.html", children: [
+                        {text: "All", url: "functions.html"},
                         {text: "Variables", url: "functions_vars.html"}]
                 }]
         },
         {
-            text: "Fichiers", url: "files.html", children: [
-                {text: "Liste des fichiers", url: "files.html"},
+            text: "Files", url: "files.html", children: [
+                {text: "File List", url: "files.html"},
                 {
-                    text: "Variables globale", url: "globals.html", children: [
+                    text: "Globals", url: "globals.html", children: [
                         {
-                            text: "Tout", url: "globals.html", children: [
+                            text: "All", url: "globals.html", children: [
                                 {text: "a", url: "globals.html#index_a"},
                                 {text: "b", url: "globals.html#index_b"},
                                 {text: "c", url: "globals.html#index_c"},
@@ -49,6 +50,7 @@ var menudata = {
                                 {text: "e", url: "globals.html#index_e"},
                                 {text: "f", url: "globals.html#index_f"},
                                 {text: "g", url: "globals.html#index_g"},
+                                {text: "j", url: "globals.html#index_j"},
                                 {text: "l", url: "globals.html#index_l"},
                                 {text: "m", url: "globals.html#index_m"},
                                 {text: "n", url: "globals.html#index_n"},
@@ -57,10 +59,11 @@ var menudata = {
                                 {text: "s", url: "globals.html#index_s"},
                                 {text: "t", url: "globals.html#index_t"},
                                 {text: "u", url: "globals.html#index_u"},
-                                {text: "v", url: "globals.html#index_v"}]
+                                {text: "v", url: "globals.html#index_v"},
+                                {text: "w", url: "globals.html#index_w"}]
                         },
                         {
-                            text: "Fonctions", url: "globals_func.html", children: [
+                            text: "Functions", url: "globals_func.html", children: [
                                 {text: "a", url: "globals_func.html#index_a"},
                                 {text: "c", url: "globals_func.html#index_c"},
                                 {text: "e", url: "globals_func.html#index_e"},
@@ -72,8 +75,8 @@ var menudata = {
                                 {text: "u", url: "globals_func.html#index_u"},
                                 {text: "v", url: "globals_func.html#index_v"}]
                         },
-                        {text: "Énumérations", url: "globals_enum.html"},
-                        {text: "Valeurs énumérées", url: "globals_eval.html"}]
+                        {text: "Enumerations", url: "globals_enum.html"},
+                        {text: "Enumerator", url: "globals_eval.html"}]
                 }]
         }]
 }
