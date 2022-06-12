@@ -6,8 +6,9 @@
 #define IF2B_CHESS_VERIF_H
 
 #include "board.h"
+#include <stdbool.h>
 
-int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, int *echec);
+int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, bool tabEchec[2]);
 
 int verifMouvement(Piece **board, int **move, int joueur);
 
@@ -23,7 +24,7 @@ int verifDame(Piece **board, int **move);
 
 int verifRoi(int **move);
 
-int verifEchec(Piece **board, int taillePlateau);
+int verifEchec(Piece **board, int taillePlateau, bool tabEchec[2]);
 
 int verifMat(Piece **board, int taillePlateau, int joueur);
 

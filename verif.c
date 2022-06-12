@@ -6,7 +6,6 @@
 #include "saisie.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include <time.h>
 #include <math.h>
@@ -21,7 +20,7 @@
  * @param taillePlateau
  * @return "validité" qui permettra d'afficher les messages d'erreur correspondants si il y a une erreur dans la déplacement
  */
-int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, int *echec) {
+int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, bool tabEchec[2]) {
     int validite;
     Piece previous;
 
@@ -41,9 +40,9 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, i
         } else {
             previous = board[move[0][1]][move[1][1]];
             executeMove(board, move);
-            *echec = verifEchec(board, taillePlateau);
+            verifEchec(board, taillePlateau, tabEchec);
             undoMove(board, move, previous);
-            if (*echec == joueur) {
+            if (tabEchec[joueur - 1]) {
                 validite = 7;   //echec
             }
         }
@@ -220,7 +219,8 @@ int verifRoi(int **move) {
  * @param taillePlateau
  * @return 0 si il n'y a pas echec, le joueur auquel appartient le roi en echec sinon
  */
-int verifEchec(Piece **board, int taillePlateau) {
+int verifEchec(Piece **board, int taillePlateau, bool tabEchec[2]) {
+    tabEchec[0] = false, tabEchec[1] = false;
     int **rois = (int **) malloc(2 * sizeof(int *));
     rois[0] = (int *) malloc(2 * sizeof(int));
     rois[1] = (int *) malloc(2 * sizeof(int));
@@ -230,12 +230,9 @@ int verifEchec(Piece **board, int taillePlateau) {
     tempMove[0] = (int *) malloc(2 * sizeof(int));
     tempMove[1] = (int *) malloc(2 * sizeof(int));
     int echec = 0;
-    int r = 0, y, x;
-    while (r < 2 && !echec) {
-        y = 0;
-        while (y < taillePlateau && !echec) {
-            x = 0;
-            while (x < taillePlateau && !echec) {
+    for (int r = 0; r < 2; ++r) {
+        for (int y = 0; y < taillePlateau; ++y) {
+            for (int x = 0; x < taillePlateau; ++x) {
                 tempMove[0][0] = x;
                 tempMove[0][1] = rois[r][0];
                 tempMove[1][0] = y;
@@ -243,39 +240,42 @@ int verifEchec(Piece **board, int taillePlateau) {
                 if (board[x][y].typePiece == PION && board[x][y].couleurPiece != r + 1) {
                     if (!verifPion(board, tempMove, -1 * (r - 2))) {
                         echec = r + 1;
+                        tabEchec[r] = true;
                     }
                 }
                 if (board[x][y].typePiece == FOU && board[x][y].couleurPiece != r + 1) {
                     if (!verifFou(board, tempMove)) {
                         echec = r + 1;
+                        tabEchec[r] = true;
                     }
                 }
                 if (board[x][y].typePiece == CAVALIER && board[x][y].couleurPiece != r + 1) {
                     if (!verifCavalier(tempMove)) {
                         echec = r + 1;
+                        tabEchec[r] = true;
                     }
                 }
                 if (board[x][y].typePiece == TOUR && board[x][y].couleurPiece != r + 1) {
                     if (!verifTour(board, tempMove)) {
                         echec = r + 1;
+                        tabEchec[r] = true;
                     }
                 }
                 if (board[x][y].typePiece == DAME && board[x][y].couleurPiece != r + 1) {
                     if (!verifDame(board, tempMove)) {
                         echec = r + 1;
+                        tabEchec[r] = true;
                     }
                 }
                 if (board[x][y].typePiece == ROI && board[x][y].couleurPiece != r + 1) {
                     if (!verifRoi(tempMove)) {
                         echec = r + 1;
+                        tabEchec[r] = true;
                     }
                 }
                 //if (echec) printf("x:%d y:%d r:%d\n", x, y, r + 1);
-                x++;
             }
-            y++;
         }
-        r++;
     }
     free(rois[0]);
     free(rois[1]);
@@ -287,8 +287,8 @@ int verifEchec(Piece **board, int taillePlateau) {
 }
 
 int verifMat(Piece **board, int taillePlateau, int joueur) {
-    Piece previous;
     bool mat = true;
+    bool tabEchec[2];
     int echec;
     int **tempMove = (int **) malloc(2 * sizeof(int *));
     tempMove[0] = (int *) malloc(2 * sizeof(int));
@@ -309,8 +309,8 @@ int verifMat(Piece **board, int taillePlateau, int joueur) {
                         tempMove[1][0] = ya;
                         tempMove[1][1] = yb;
 
-                        if (!verifDeplacement(board, tempMove, joueur, taillePlateau, &echec)) {
-                            if (echec != joueur) {
+                        if (!verifDeplacement(board, tempMove, joueur, taillePlateau, tabEchec)) {
+                            if (!tabEchec[joueur]) {
                                 printf("Mat :\n%d %d\n%d %d\n", xa, xb, ya, yb);
                                 mat = false;
                             }

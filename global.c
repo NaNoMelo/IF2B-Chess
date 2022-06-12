@@ -13,6 +13,7 @@
 #include "board.h"
 #include "verif.h"
 #include "save.h"
+
 /**
  *
  * @param board
@@ -20,12 +21,13 @@
  * @param taillePlateau
  */
 void game(Piece **board, int tour, int taillePlateau) {
+    char strColor[2][10] = {"Blanc", "Noir"};
     int **move = (int **) malloc(sizeof(int *) * 2);
-    for (int i = 0; i < 2; i++) {
-        move[i] = (int *) malloc(sizeof(int) * 2);
-    }
+    move[0] = (int *) malloc(sizeof(int) * 2);
+    move[1] = (int *) malloc(sizeof(int) * 2);
     bool partie = true;
-    int joueur, echec, action, validite;
+    bool tabEchec[2];
+    int joueur, action, validite;
 
     while (partie) {
         joueur = tour % 2 + 1; //si joueur Blanc : 1, si joueur Noir : 2
@@ -40,7 +42,7 @@ void game(Piece **board, int tour, int taillePlateau) {
                         saveGame(board, taillePlateau, tour);
                         break;
                     case 2:
-                        printf("Abandon du joueur %d !\n", joueur);
+                        printf("Abandon du joueur %s !\n", strColor[joueur - 1]);
                         partie = false;
                         break;
                     case 3:
@@ -49,37 +51,28 @@ void game(Piece **board, int tour, int taillePlateau) {
                 }
             } while (action && partie);
             if (partie) {
-                validite = verifDeplacement(board, move, joueur, taillePlateau, &echec);
+                validite = verifDeplacement(board, move, joueur, taillePlateau, tabEchec);
                 printErr(validite);
             }
         } while (validite && partie);
         if (partie) {
             executeMove(board, move);
-            if (echec == -1 * (joueur - 3)) {
-                printf("verif mat\n");
-                if (verifMat(board, taillePlateau, -1 * (joueur - 3))) {
-                    printf("Echec et Mat ! Victoire pour le joueur %d\n", joueur);
-                    partie = false;
-                } else {
-                    printf("pas mat");
+            for (int i = 0; i < 2; ++i) {
+                if (tabEchec[i]) {
+                    printf("Echec pour le joueur %s !\n", strColor[i]);
                 }
             }
-            switch (echec) {
-                default:
-                    break;
-                case 1:
-                    printf("Echec pour le joueur Blanc !\n");
-                    break;
-                case 2:
-                    printf("Echec pour le joueur Noir !\n");
-                    break;
+
+            if (tabEchec[-1 * (joueur - 3)]) {
+                if (verifMat(board, taillePlateau, -1 * (joueur - 3))) {
+                    printf("Echec et Mat ! Victoire pour le joueur %s\n", strColor[joueur - 1]);
+                    partie = false;
+                }
             }
             tour++;
         }
     }
-
-    for (int i = 0; i < 2; ++i) {
-        free(move[i]);
-    }
+    free(move[0]);
+    free(move[1]);
     free(move);
 }

@@ -5,6 +5,8 @@
 #ifndef IF2B_CHESS_SAISIE_H
 #define IF2B_CHESS_SAISIE_H
 
+#include <stdbool.h>
+
 typedef enum {
     BLACK,
     BLEU_FONCE,
@@ -30,6 +32,8 @@ int askMenu();
 int askTaillePlateau();
 
 int askDeplacement(int taillePlateau, int joueur, int **move);
+
+bool askOuiNon(char question[100]);
 
 int sign(int nombre);
 

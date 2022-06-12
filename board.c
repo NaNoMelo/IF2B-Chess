@@ -44,7 +44,7 @@ void genererPlateau(int taille, Piece **board) {
  */
 void afficherPlateau(int taille, Piece **board) {
     char lettres[] = {" abcdefghijkl"};
-    char pieces[] = {"-PFCTDR"};
+    char pieces[] = {" PFCTDR"};
     char couleurs[] = {" BN"};
     for (int y = 0; y <= taille; y++) {
         for (int x = 0; x <= taille; ++x) {

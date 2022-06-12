@@ -12,68 +12,70 @@
 
 int main() {
     int taillePlateau, tour, menu;
+    bool rejouer;
     bool saveAvailable, ready;
     Piece **board;
     FILE *save;
-    //do {
-    saveAvailable = true, ready = false;
-
-    save = fopen("./save.txt", "r");
-    if (save == NULL) {
-        saveAvailable = false;
-        fclose(save);
-    } else {
-        fscanf(save, "%d", &taillePlateau);
-        fclose(save);
-    }
-
+    rejouer = (bool) askOuiNon("Shouaitez vous rejouer ?\n");
+    printf("%d", (int) rejouer);
     do {
-        menu = askMenu();
-        switch (menu) {
-            case 2:
-                if (saveAvailable) {
-                    printf("load\n");
-                    printf("Taille : %d\n", taillePlateau);
-                    if (taillePlateau > 12 || taillePlateau < 6) {
-                        printf("Echec du chargement de la partie\n");
-                    } else {
-                        board = (Piece **) malloc(sizeof(Piece *) * taillePlateau);
-                        for (int i = 0; i < taillePlateau; i++) {
-                            board[i] = (Piece *) malloc(sizeof(Piece) * taillePlateau);
-                        }
-                        loadGame(board, taillePlateau, &tour);
-                        ready = true;
-                    }
-                } else printf("Aucune sauvegarde disponible\n");
-                break;
+        saveAvailable = true, ready = false;
 
-            case 1: {
-                taillePlateau = askTaillePlateau();
-                board = (Piece **) malloc(sizeof(Piece *) * taillePlateau);
-                for (int i = 0; i < taillePlateau; i++) {
-                    board[i] = (Piece *) malloc(sizeof(Piece) * taillePlateau);
-                }
-                genererPlateau(taillePlateau, board);
-                tour = 0;
-                ready = true;
-                break;
-            }
-
-            case 3:
-                printf("quit\n");
-                exit(0);
-
-            default:
-                break;
+        save = fopen("./save.txt", "r");
+        if (save == NULL) {
+            saveAvailable = false;
+            fclose(save);
+        } else {
+            fscanf(save, "%d", &taillePlateau);
+            fclose(save);
         }
-    } while (!ready);
 
-    game(board, tour, taillePlateau);
+        do {
+            menu = askMenu();
+            switch (menu) {
+                case 2:
+                    if (saveAvailable) {
+                        if (taillePlateau > 12 || taillePlateau < 6) {
+                            printf("Echec du chargement de la partie\n");
+                        } else {
+                            board = (Piece **) malloc(sizeof(Piece *) * taillePlateau);
+                            for (int i = 0; i < taillePlateau; i++) {
+                                board[i] = (Piece *) malloc(sizeof(Piece) * taillePlateau);
+                            }
+                            loadGame(board, taillePlateau, &tour);
+                            ready = true;
+                        }
+                    } else printf("Aucune sauvegarde disponible\n");
+                    break;
 
-    for (int i = 0; i < taillePlateau; i++) {
-        free(board[i]);
-    }
-    free(board);
-//}while(true);
+                case 1: {
+                    taillePlateau = askTaillePlateau();
+                    board = (Piece **) malloc(sizeof(Piece *) * taillePlateau);
+                    for (int i = 0; i < taillePlateau; i++) {
+                        board[i] = (Piece *) malloc(sizeof(Piece) * taillePlateau);
+                    }
+                    genererPlateau(taillePlateau, board);
+                    tour = 0;
+                    ready = true;
+                    break;
+                }
+
+                case 3:
+                    exit(0);
+
+                default:
+                    break;
+            }
+        } while (!ready);
+
+        game(board, tour, taillePlateau);
+
+        for (int i = 0; i < taillePlateau; i++) {
+            free(board[i]);
+        }
+        free(board);
+
+        rejouer = askOuiNon("Shouaitez vous rejouer ?");
+    } while (rejouer);
     return 0;
 }
