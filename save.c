@@ -1,11 +1,13 @@
-//
-// Created by natha on 16/05/2022.
-//
-
 #include <stdio.h>
 #include "board.h"
 #include "save.h"
 
+/**
+ * Fonction permettant de sauvegarder la partie en cours
+ * @param board
+ * @param taillePlateau
+ * @param tour
+ */
 void saveGame(Piece **board, int taillePlateau, int tour) {
     FILE *save = fopen("./save.txt", "w");
     rewind(save);
@@ -19,6 +21,12 @@ void saveGame(Piece **board, int taillePlateau, int tour) {
     fclose(save);
 }
 
+/**
+ * Fonction permettant de charger la dernière partie sauvegarder
+ * @param board
+ * @param taillePlateau
+ * @param tour
+ */
 void loadGame(Piece **board, int taillePlateau, int *tour) {
     FILE *save = fopen("./save.txt", "r");
     fscanf(save, "%d", &taillePlateau);

@@ -1,16 +1,8 @@
-//
-// Created by natha on 10/05/2022.
-//
-
 #include "saisie.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
-#include <math.h>
 #include "ctype.h"
-#include "verif.h"
-#include "board.h"
 #include <windows.h>
 
 /**
@@ -90,6 +82,11 @@ int askDeplacement(int taillePlateau, int joueur, int **move) {
     return action;
 }
 
+/**
+ * Fonction permet de poser une question à l’utilisateur à laquelle il peut répondre par oui ou par non.
+ * @param question
+ * @return rep = true ou false
+ */
 bool askOuiNon(char *question) {
     char reponse[10];
     char help[100];
@@ -121,7 +118,7 @@ int sign(int nombre) {
 }
 
 /**
- * Fonction affichant sur la console les erreurs dans le mouvement que propose le joueur
+ * Fonction affichant sur la console les erreurs dans le mouvement que propose le joueur (si il y en as)6
  * @param validite (contenant les chiffres renvoyés par les fonctions de verification des pièces)
  */
 void printErr(int validite) {
@@ -154,6 +151,11 @@ void printErr(int validite) {
     }
 }
 
+/**
+ * Fonction affichant les couleurs sur le texte et le fond
+ * @param texte
+ * @param fond
+ */
 void setColor(Couleur texte, Couleur fond) {
     HANDLE H = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(H, fond * 16 + texte);

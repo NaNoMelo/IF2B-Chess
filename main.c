@@ -1,12 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
-#include <time.h>
-#include <math.h>
 #include "saisie.h"
 #include "board.h"
-#include "verif.h"
 #include "save.h"
 #include "global.h"
 

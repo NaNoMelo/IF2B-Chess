@@ -1,7 +1,3 @@
-//
-// Created by natha on 10/06/2022.
-//
-
 #include "global.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,7 +8,7 @@
 #include "save.h"
 
 /**
- *
+ * Fonction centralisant le déroulement d'une partie
  * @param board
  * @param tour
  * @param taillePlateau

@@ -1,16 +1,8 @@
-//
-// Created by natha on 10/05/2022.
-//
-
 #include "board.h"
 #include <stdlib.h>
 #include "stdio.h"
-#include <stdbool.h>
-#include <string.h>
 #include <time.h>
-#include <math.h>
 #include "saisie.h"
-#include "verif.h"
 
 /**
  * Fonction générant les pièces répartis alléatoirement sur le plateau

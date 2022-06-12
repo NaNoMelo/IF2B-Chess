@@ -1,7 +1,3 @@
-//
-// Created by yannt on 16/05/2022.
-//
-
 #include "verif.h"
 #include "saisie.h"
 #include <stdio.h>
@@ -18,6 +14,7 @@
  * @param move
  * @param joueur
  * @param taillePlateau
+ * @param echec
  * @return "validité" qui permettra d'afficher les messages d'erreur correspondants si il y a une erreur dans la déplacement
  */
 int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, bool tabEchec[2]) {
@@ -54,7 +51,6 @@ int verifDeplacement(Piece **board, int **move, int joueur, int taillePlateau, b
  * Fonction centralisant les vérifications des pièces
  * @param board
  * @param move
- * @param piece
  * @param joueur
  * @return "validité" qui contient le code retourné par chaque vérification
  */
@@ -91,8 +87,8 @@ int verifMouvement(Piece **board, int **move, int joueur) {
  * @param board
  * @param move
  * @param joueur
- * @return
- */
+ * @return pion = 0 si le mouvement est correct, 4 si le mouvement n'est pas possible, 5 si une pièce est sur la trajectoire
+ * */
 int verifPion(Piece **board, int **move, int joueur) {
     int pion = 0;
     joueur *= 2; //2 pour joueur 1, 4 pour joueur 2
@@ -127,7 +123,7 @@ int verifPion(Piece **board, int **move, int joueur) {
  * Fonction vérifiant si le mouvement d'un fou est possible
  * @param board
  * @param move
- * @return 4 si le mouvement n'est pas possible, 5 si une pièce est sur la trajectoire de la pièce ou 0 si le mouvement est valide
+ * @return fou = 4 si le mouvement n'est pas possible, 5 si une pièce est sur la trajectoire de la pièce ou 0 si le mouvement est valide
  */
 int verifFou(Piece **board, int **move) {
     int fou = 0;
@@ -146,7 +142,7 @@ int verifFou(Piece **board, int **move) {
 /**
  * Fonction vérifiant si le mouvement d'un cavalier est possible
  * @param move
- * @return 0 si le mouvement est possible, 4 si il n'est pas possible
+ * @return cavalier = 0 si le mouvement est possible, 4 si il n'est pas possible
  */
 int verifCavalier(int **move) {
     int cavalier = 0;
@@ -161,7 +157,7 @@ int verifCavalier(int **move) {
  * Fonction vérifiant si le mouvement d'une tour est possible
  * @param board
  * @param move
- * @return 0 si le mouvement est possible, 4 si il n'est pas valide, 5 si il y a une pièce sur la trajectoire
+ * @return tour = 0 si le mouvement est possible, 4 si il n'est pas valide, 5 si il y a une pièce sur la trajectoire
  */
 int verifTour(Piece **board, int **move) {
     int tour = 0;
@@ -183,7 +179,7 @@ int verifTour(Piece **board, int **move) {
  * Fonctvérifiant si le mouvement d'une dame est possible en utilisant les fonctions du fou et de la tour
  * @param board
  * @param move
- * @return 0 si le mouvement est possible, tour/fou qui contient le numéro d'erreur relié à la tour ou au fou
+ * @return dame = 0 si le mouvement est possible, tour/fou qui contient le numéro d'erreur relié à la tour ou au fou
  */
 int verifDame(Piece **board, int **move) {
     int dame;
@@ -201,7 +197,7 @@ int verifDame(Piece **board, int **move) {
 /**
  * Foncton vérifiant si le mouvement d'un roi est possible
  * @param move
- * @return 0 si le mouvement est possible, 4 si le mouvement n'est pas valide
+ * @return roi = 0 si le mouvement est possible, 4 si le mouvement n'est pas valide
  */
 int verifRoi(int **move) {
     int roi;
@@ -217,7 +213,7 @@ int verifRoi(int **move) {
  * Fonction vérifiant si il y a echec
  * @param board
  * @param taillePlateau
- * @return 0 si il n'y a pas echec, le joueur auquel appartient le roi en echec sinon
+ * @return echec = le roi de telle couleur est en echec
  */
 int verifEchec(Piece **board, int taillePlateau, bool tabEchec[2]) {
     tabEchec[0] = false, tabEchec[1] = false;
@@ -286,6 +282,13 @@ int verifEchec(Piece **board, int taillePlateau, bool tabEchec[2]) {
     return echec;
 }
 
+/**
+ * Fonction vérifiant si il y a échec et mat
+ * @param board
+ * @param taillePlateau
+ * @param joueur
+ * @return mat = true ou false
+ */
 int verifMat(Piece **board, int taillePlateau, int joueur) {
     bool mat = true;
     bool tabEchec[2];
