@@ -21,7 +21,9 @@ void game(Piece **board, int tour, int taillePlateau) {
     bool partie = true;
     bool tabEchec[2];
     int joueur, action, validite;
-
+    setColor(BLACK, WHITE),
+            printf(" A tout moment de la partie, vous pouvez Saisir : \n  'X' pour abandonner                             \n  'S' Pour sauvegarder l'etat actuel de la partie \n"),
+            setColor(WHITE, BLACK);
     while (partie) {
         joueur = tour % 2 + 1; //si joueur Blanc : 1, si joueur Noir : 2
         afficherPlateau(taillePlateau, board);

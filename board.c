@@ -35,9 +35,10 @@ void genererPlateau(int taille, Piece **board) {
  * @param board tableau représentant le plateau de jeu
  */
 void afficherPlateau(int taille, Piece **board) {
-    char lettres[] = {" abcdefghijkl"};
-    char pieces[] = {" PFCTDR"};
-    char couleurs[] = {" BN"};
+    const Couleur couleur1 = WHITE, couleur2 = BLEU_FONCE;
+    const char lettres[] = {" abcdefghijkl"};
+    const char pieces[] = {" PFCTDR"};
+    const char couleurs[] = {" BN"};
     for (int y = 0; y <= taille; y++) {
         for (int x = 0; x <= taille; ++x) {
             if (y == 0) {
@@ -47,8 +48,8 @@ void afficherPlateau(int taille, Piece **board) {
                     printf(" %d", y);
                     if (y < 10) printf(" ");
                 } else {
-                    setColor((x + y) % 2 * (WHITE - BLEU_FONCE) + BLEU_FONCE,
-                             (x + y + 1) % 2 * (WHITE - BLEU_FONCE) + BLEU_FONCE);
+                    setColor((x + y) % 2 * (couleur1 - couleur2) + couleur2,
+                             (x + y + 1) % 2 * (couleur1 - couleur2) + couleur2);
                     printf(" %c%c", pieces[board[x - 1][y - 1].typePiece],
                            couleurs[board[x - 1][y - 1].couleurPiece]);
                 }
